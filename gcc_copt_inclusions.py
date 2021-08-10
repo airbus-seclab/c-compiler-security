@@ -7,6 +7,8 @@ import logging
 import re
 from enum import Enum
 
+languages = []
+
 class State(Enum):
     INIT = 1
     LANGUAGE = 2
@@ -40,12 +42,16 @@ class GCCOption():
         self.enabled_by = []
         self.enables = []
         self.help = ""
+        self.langs = self.props.get("LangEnabledBy", "").split(',')[0].split(' ') or []
 
     def __str__(self):
         return "-%s {%r}" % (self.name, self.props)
 
     def __repr__(self):
         return str(self)
+
+    def is_valid_for_lang(self, lang):
+        return "Common" in self.props.keys() or lang in self.langs
 
     def is_warning(self):
         return not self.is_alias() and "Warning" in self.props.keys()
@@ -66,7 +72,7 @@ class GCCOption():
         # TODO: less hackish
         return "Var(" in self.raw_props and "Init(1)" in self.raw_props and "Range" not in self.raw_props
 
-    def get_enabled_by(self, lang="C"):
+    def get_enabled_by(self):
         # TODO: handle && and ||
         res = []
         if "EnabledBy" in self.props.keys():
@@ -78,8 +84,7 @@ class GCCOption():
                 lang_args = lang_args[0:2]
             if len(lang_args) > 1:
                 langs, opt = lang_args
-                if lang in langs:
-                    res.append(opt.strip(' '))
+                res.append(opt.strip(' '))
         if res:
             return res
         return None
@@ -97,7 +102,7 @@ class GCCOption():
                 print("\tLangEnabledBy", e)
         if self.enables:
             print("\tEnables:", ", ".join(self.enables))
-        print("\tHelp:", self.help.rstrip("\n "))
+        print("\tHelp:", self.help)#.rstrip())
         print("\t"+self.raw_props)
 
 class GCCEnum():
@@ -116,9 +121,9 @@ class GCCEnum():
 parser = argparse.ArgumentParser(description='Parse GCC option definition file (.opt)')
 parser.add_argument('file', help='The file to parse')
 parser.add_argument('arg', nargs='*', help='Arg to display details of')
-parser.add_argument('--list-not-enabled', action='store_true', help="List warnings not enabled by -Wall and -Wextra")
-parser.add_argument('-v', '--verbose', action='store_true',
-                    help='verbose operations')
+parser.add_argument('--warn-not-enabled', action='store_true', help="List warnings not enabled by -Wall and -Wextra")
+parser.add_argument('--lang', help="Restrict to this language")
+parser.add_argument('-v', '--verbose', action='store_true', help='verbose operations')
 
 args = parser.parse_args()
 
@@ -130,7 +135,6 @@ current_option = None
 
 Ignored_options = ['TargetSave', 'Variable', 'TargetVariable', 'HeaderInclude', 'SourceInclude']
 
-languages = []
 enums = {}
 options = {}
 with open(args.file, "r") as f:
@@ -162,7 +166,7 @@ with open(args.file, "r") as f:
             # Ignore line
             continue
         elif state == State.OPTION_HELP:
-            options[current_option].help += l+"\n"
+            options[current_option].help += l
         elif state == State.LANGUAGE:
             logging.debug('New language: %s',l)
             languages.append(l)
@@ -175,21 +179,24 @@ with open(args.file, "r") as f:
             enum_name = enum_value_info['Enum']
             enums[enum_name].values[enum_value_info['String']] = enum_value_info['Value']
         elif state == State.OPTION:
-            opt = GCCOption(current_option, l)
-            logging.debug("%r", opt)
-            options[current_option] = opt
-            state = State.OPTION_HELP
+            # Skip already defined options
+            # TODO: check which definition is the best ?
+            if current_option not in options:
+                opt = GCCOption(current_option, l)
+                logging.debug("%r", opt)
+                options[current_option] = opt
+                state = State.OPTION_HELP
+            else:
+                state = State.IGNORE
         else:
             raise RuntimeError("Invalid STATE "+str(state))
 
 # Consolidate options
-to_del = []
 for name, opt in options.items():
     # Aliases are added to the real option, then deleted
     alias_target = opt.get_alias_target()
     if alias_target:
         options[alias_target].aliases.append(name)
-        to_del.append(name)
         continue
     enabled_by = opt.get_enabled_by()
     if enabled_by:
@@ -207,7 +214,7 @@ def get_enabled_by_recursive(opt, res=[]):
         return res
     return res
 
-if args.list_not_enabled:
+if args.warn_not_enabled:
     for name, opt in options.items():
         if opt.is_warning() and not opt.is_by_default() and name not in ("Wextra", "Wall"):
             if opt.is_enabled_by():
