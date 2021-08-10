@@ -45,6 +45,8 @@ effective, so I recommend to always use `-O2`.
 * `-Wtraditional-conversion`: Warn of prototypes causing type conversions different from what would happen in the absence of prototype.
 * `-Wshift-overflow=2`: Warn if left shift of a signed value overflows.
 * `-Wcast-qual`: Warn about casts which discard qualifiers.
+* `-Wstringop-overflow=4`: Under the control of Object Size type, warn about buffer overflow in stringmanipulation functions like memcpy and strcpy. 
+* `-Warith-conversion`: Warn if conversion of the result of arithmetic might change the value even though converting the operands cannot.
 
 Those are not really security options per se, but will catch some logical errors:
 
@@ -61,6 +63,8 @@ Those are not really security options per se, but will catch some logical errors
 * `-Wstrict-prototypes`: Warn about unprototyped function declarations
 * `-Wswitch-default`: Warn about enumerated switches missing a `default:` statement.
 * `-Wswitch-enum`: Warn about all enumerated switches missing a specific case.
+* `-Wstack-usage=<byte-size>`: Warn if stack usage might exceed `<byte-size>`.
+* `-Wcast-align=strict`: Warn about pointer casts which increase alignment.
 
 ### Compilation flags
 
