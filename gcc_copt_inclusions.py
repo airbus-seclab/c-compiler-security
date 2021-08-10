@@ -34,6 +34,7 @@ def parse_properties_string(s):
 class GCCOption():
     def __init__(self, name, props):
         self.name = name
+        self.raw_props = props.strip("\n ")
         self.props = parse_properties_string(props)
         self.aliases = []
         self.enabled_by = []
@@ -46,6 +47,9 @@ class GCCOption():
     def __repr__(self):
         return str(self)
 
+    def is_warning(self):
+        return not self.is_alias() and "Warning" in self.props.keys()
+
     def is_alias(self):
         return "Alias" in self.props.keys()
 
@@ -57,6 +61,10 @@ class GCCOption():
     def is_enabled_by(self):
         keys = self.props.keys()
         return "EnabledBy" in keys or "LangEnabledBy" in keys
+
+    def is_by_default(self):
+        # TODO: less hackish
+        return "Var(" in self.raw_props and "Init(1)" in self.raw_props and "Range" not in self.raw_props
 
     def get_enabled_by(self, lang="C"):
         # TODO: handle && and ||
@@ -77,15 +85,20 @@ class GCCOption():
         return None
 
     def pretty_print(self):
-        print("Option:", self.name)
+        print("Option:", self.name, "[DEFAULT ON]" if self.is_by_default() else "")
         if self.is_alias():
             print("\tAlias:", self.props["Alias"])
         if self.is_enabled_by():
-            print("\tEnabledBy", self.props.get('EnabledBy', ''))
-            print("\tLangEnabledBy", self.props.get('LangEnabledBy', ''))
+            e = self.props.get('EnabledBy', None)
+            if e:
+                print("\tEnabledBy", e)
+            e = self.props.get('LangEnabledBy', None)
+            if e:
+                print("\tLangEnabledBy", e)
         if self.enables:
             print("\tEnables:", ", ".join(self.enables))
-        print("\tHelp:", self.help)
+        print("\tHelp:", self.help.rstrip("\n "))
+        print("\t"+self.raw_props)
 
 class GCCEnum():
     def __init__(self, s):
@@ -103,6 +116,7 @@ class GCCEnum():
 parser = argparse.ArgumentParser(description='Parse GCC option definition file (.opt)')
 parser.add_argument('file', help='The file to parse')
 parser.add_argument('arg', nargs='*', help='Arg to display details of')
+parser.add_argument('--list-not-enabled', action='store_true', help="List warnings not enabled by -Wall and -Wextra")
 parser.add_argument('-v', '--verbose', action='store_true',
                     help='verbose operations')
 
@@ -183,5 +197,26 @@ for name, opt in options.items():
             if "&&" not in en and "||" not in en:
                 options[en].enables.append(name)
 
-for arg in args.arg:
-    options[arg].pretty_print()
+def get_enabled_by_recursive(opt, res=[]):
+    if opt.is_enabled_by():
+        en_by = opt.get_enabled_by()
+        for o in en_by:
+            res.append(o)
+            if "&&" not in o and "||" not in o:
+                get_enabled_by_recursive(options[o], res)
+        return res
+    return res
+
+if args.list_not_enabled:
+    for name, opt in options.items():
+        if opt.is_warning() and not opt.is_by_default() and name not in ("Wextra", "Wall"):
+            if opt.is_enabled_by():
+                en_by = get_enabled_by_recursive(opt)
+                if "Wextra" in en_by or "Wall" in en_by:
+                    continue
+            opt.pretty_print()
+else:
+    for arg in args.arg:
+        p = re.compile(arg)
+        for found_opt in filter(lambda x: p.match(x), options.keys()):
+            options[found_opt].pretty_print()
