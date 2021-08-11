@@ -1,6 +1,5 @@
 # Getting the maximum of your C compiler, for security
 
-
 ## GCC
 
 Understanding GCC flags is a *pain*. Which are enabled by `Wall` or `Wextra` is
@@ -41,12 +40,12 @@ effective, so I recommend to always use `-O2`.
 * `-Wvla` or `-Wvla-larger-than=1048576`: don't use variable length arrays, or limit them to "small" sizes
 * `-Warray-bounds=2`: Warn if an array is accessed out of bounds. Note that it is very limited and will not catch some cases which may seem obvious.
 * `-Wimplicit-fallthrough=3`: already added by `-Wextra`, but mentioned for reference.
-* `-Wconversion`: Warn for implicit type conversions that may change a value.
 * `-Wtraditional-conversion`: Warn of prototypes causing type conversions different from what would happen in the absence of prototype.
 * `-Wshift-overflow=2`: Warn if left shift of a signed value overflows.
 * `-Wcast-qual`: Warn about casts which discard qualifiers.
 * `-Wstringop-overflow=4`: Under the control of Object Size type, warn about buffer overflow in stringmanipulation functions like memcpy and strcpy. 
-* `-Warith-conversion`: Warn if conversion of the result of arithmetic might change the value even though converting the operands cannot.
+* `-Wconversion`: Warn for implicit type conversions that may change a value. *Note*: will probably introduce lots of warnings.
+* `-Warith-conversion`: Warn if conversion of the result of arithmetic might change the value even though converting the operands cannot. *Note*: will probably introduce lots of warnings.
 
 Those are not really security options per se, but will catch some logical errors:
 
@@ -69,11 +68,48 @@ Those are not really security options per se, but will catch some logical errors
 ### Compilation flags
 
 * `-fstack-protector-strong`: add stack cookie checks to functions with stack buffers or pointers
-* `-fPIE`: generate position-independant code (needed for ASLR)
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from stack-clash style attacks.
+* `-fPIE`: generate position-independant code (needed for ASLR)
 
+### Code analysis
+
+GCC 10 [introduced](https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10)
+the `-fanalyzer` static code analysis tool, which was vastly [improved](https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11) in GCC 11.
+
+It tries to detect memory management issues (double free, use after free,
+etc.), pointers-related problems, etc.
+
+It *is* costly and slows down compilation and also exhibits false positives, so
+its use may not always be practical.
+
+### Runtime sanitizers
+
+GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize` flags, which are often not compatible and thus must be run separately.
+
+* `address`: AddressSanitizer, with extra options available:
+ * `pointer-compare `: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
+ * `pointer-substract`: Instrument subtraction with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
+* `thread`: ThreadSanitizer, a data race detector.
+* `leak`: memory leak detector for programs which override `malloc` and other allocators.
+* `undefined`: UndefinedBehaviorSanitizer. Checks not enabled by default (GCC 11):
+ * `-fsanitize=bounds-strict`
+ * `-fsanitize=float-divide-by-zero`
+ * `-fsanitize=float-cast-overflow`
+
+`kernel-address` also exists and enables AddressSanitizer for the Linux kernel.
+
+#### Use with fuzzing
+
+Runtime sanitizers are particularly useful when:
+
+* running test suites
+* fuzzing code
+
+as they may uncover runtime errors which would not necessarily trigger a crash.
 
 ### References
+* <https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10>
+* <https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11>
 * <https://developers.redhat.com/blog/2017/02/22/memory-error-detection-using-gcc>
 * <https://codeforces.com/blog/entry/15547>
 
@@ -83,9 +119,51 @@ Those are not really security options per se, but will catch some logical errors
 
 * `-Wshorten-64-to-32`
 
+### Runtime sanitizers
+
+* `-fsanitize=integer`
+
+#### In production
+
+* `-fsanitize=integer`
+* `-fsanitize-minimal-runtime`
+* `-fsanitize-no-recover`
+
 ### References
 
 * <https://clang.llvm.org/docs/DiagnosticsReference.html>
+* <https://copperhead.co/blog/memory-disclosure-mitigations/>
+* <https://source.android.com/devices/tech/debug/intsan>
+* <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>
+
+## Microsoft Visual Studio
+
+As I am not running Windows, this section is less precise. But recent versions
+of Visual Studio support using Clang as a compiler, so all the Clang options
+apply.
+
+### Warnings
+
+*All* warnings can be enabled by by using the `/Wall` option, as documented [here](https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=msvc-160)
+
+### Compilation flags
+
+* `/GS`: Checks buffer security [doc](https://docs.microsoft.com/en-us/cpp/build/reference/gs-buffer-security-check?view=msvc-160).
+* `/sdl`: enables "Strict mode" for `/GS` and additional checks. [doc](https://docs.microsoft.com/en-us/cpp/build/reference/sdl-enable-additional-security-checks?view=msvc-160)
+* `/DYNAMICBASE`: Generate PIE code for ASLR (default on for recent)
+* `/HIGHENTROPYVA`: High entropy ASLR for 64 bits targets. (default on)
+
+### Code analysis
+
+Recent versions of Visual Studio support "Code Analysis", as documented here: <https://docs.microsoft.com/en-us/cpp/code-quality/code-analysis-for-c-cpp-overview?view=msvc-160>
+
+
+### Sanitizers
+
+Visual Studio 2019 introduced support for ASan, documented here: <https://docs.microsoft.com/en-us/cpp/sanitizers/?view=msvc-160>
+
+The `/fanalyze` command line option is documented here: <https://docs.microsoft.com/en-us/cpp/build/reference/fsanitize?view=msvc-160>
+
 
 ## References
 
