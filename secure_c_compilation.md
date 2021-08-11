@@ -1,6 +1,5 @@
 # Getting the maximum of your C compiler, for security
 
-
 ## GCC
 
 Understanding GCC flags is a *pain*. Which are enabled by `Wall` or `Wextra` is
@@ -69,8 +68,8 @@ Those are not really security options per se, but will catch some logical errors
 ### Compilation flags
 
 * `-fstack-protector-strong`: add stack cookie checks to functions with stack buffers or pointers
-* `-fPIE`: generate position-independant code (needed for ASLR)
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from stack-clash style attacks.
+* `-fPIE`: generate position-independant code (needed for ASLR)
 
 
 ### References
@@ -86,6 +85,9 @@ Those are not really security options per se, but will catch some logical errors
 ### References
 
 * <https://clang.llvm.org/docs/DiagnosticsReference.html>
+* <https://copperhead.co/blog/memory-disclosure-mitigations/>
+* <https://source.android.com/devices/tech/debug/intsan>
+* <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>
 
 ## References
 
