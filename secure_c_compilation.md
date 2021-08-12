@@ -70,6 +70,7 @@ Those are not really security options per se, but will catch some logical errors
 * `-fstack-protector-strong`: add stack cookie checks to functions with stack buffers or pointers
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from stack-clash style attacks.
 * `-fPIE`: generate position-independant code (needed for ASLR)
+<<<<<<< HEAD
 
 ### Code analysis
 
@@ -85,6 +86,8 @@ its use may not always be practical.
 ### Runtime sanitizers
 
 GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize` flags, which are often not compatible and thus must be run separately.
+=======
+>>>>>>> 294dcaf584770830f65fed38bf875006681ae7fd
 
 * `address`: AddressSanitizer, with extra options available:
  * `pointer-compare `: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
