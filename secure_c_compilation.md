@@ -1,6 +1,6 @@
 # Getting the maximum of your C compiler, for security
 
-## GCC
+## GCC (11)
 
 Understanding GCC flags is a *pain*. Which are enabled by `Wall` or `Wextra` is
 not very easy to untangle.
@@ -89,6 +89,7 @@ GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize`
 * `address`: AddressSanitizer, with extra options available:
  * `pointer-compare `: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
  * `pointer-substract`: Instrument subtraction with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
+ * `ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1`
 * `thread`: ThreadSanitizer, a data race detector.
 * `leak`: memory leak detector for programs which override `malloc` and other allocators.
 * `undefined`: UndefinedBehaviorSanitizer. Checks not enabled by default (GCC 11):
@@ -112,16 +113,56 @@ as they may uncover runtime errors which would not necessarily trigger a crash.
 * <https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11>
 * <https://developers.redhat.com/blog/2017/02/22/memory-error-detection-using-gcc>
 * <https://codeforces.com/blog/entry/15547>
+* <https://github.com/google/sanitizers/wiki/AddressSanitizerFlags>
 
-## Clang
+## Clang (12)
+
+Clang compiler flags are described by a domain specific language call
+[TableGen](https://llvm.org/docs/TableGen/index.html), and LLVM includes a tool
+called `llvm-tblgen` which parses the definition files, `DiagnosticsGroups.td` in particular.
+
 
 ### Warnings
 
-* `-Wshorten-64-to-32`
+Clang thankfully provides a `-Weverything` option which enables *all* warnings.
+So, I recommend using `-Weverything` and then selectively disable the warnings
+which are too not relevant for your code base.
+
+Clang supports the following warnings which are compatible with GCC:
+
+`-Walloca`,`-Wcast-qual`,`-Wconversion`,`-Wformat=2`,`-Wformat-security`,`-Wlogical-op`,`-Wnull-dereference`,`-Wstack-protector`,`-Wstrict-overflow=3`,`-Wvla`
+
+Some other warnings are of interest for security:
+
+* `-Wconversion`: which enables a lot of warning related to implicit conversions, with some which are interesting: 
+    * `-Wshorten-64-to-32`: warn on 64 bit truncation (`long` to `int` for example)
+* `-Warray-bounds`: which does not take an argument, contrary to GCC (enabled by default)
+* `-Warray-bounds-pointer-arithmetic`
+* `-Wimplicit-fallthrough`: does not take an argument
+* `-Wconditional-uninitialized`
+* `-Wloop-analysis`
+* `-Wshift-sign-overflow`
+* `-Wswitch-enum`
+* `-Wtautological-constant-in-range-compare`
+
+### Compiler flags
+
+-fstack-clash-protection
+-fstack-protector-strong (or -fstack-protector-all)
+-fPIE
+-fcf-protection
+Generate code for Intel CET
+-ftrivial-auto-var-init=pattern
+Auto initialize variables with a random pattern, can be costly ?
 
 ### Runtime sanitizers
 
+LLVM support of sanitizers is first class, besides `AddressSanitizer`, `ThreadSanitizer`, `LeakSanitizer` and `UndefinedBehaviorSanitizer`, which are included in GCC, the following are available:
+
+* `MemorySanitizer`: MemorySanitizer is a detector of uninitialized reads. 
+
 * `-fsanitize=integer`
+* `-fsanitize=cfi`
 
 #### In production
 
@@ -129,14 +170,20 @@ as they may uncover runtime errors which would not necessarily trigger a crash.
 * `-fsanitize-minimal-runtime`
 * `-fsanitize-no-recover`
 
+### Code analysis
+
+* `scan-build`
+* `DataFlowSanitizer` can be used to develop your own, application specific, code analyzer
+
 ### References
 
-* <https://clang.llvm.org/docs/DiagnosticsReference.html>
+* <https://releases.llvm.org/12.0.0/tools/clang/docs/DiagnosticsReference.html>
+* <https://releases.llvm.org/12.0.0/tools/clang/docs/index.html>
 * <https://copperhead.co/blog/memory-disclosure-mitigations/>
 * <https://source.android.com/devices/tech/debug/intsan>
 * <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>
 
-## Microsoft Visual Studio
+## Microsoft Visual Studio (2019)
 
 As I am not running Windows, this section is less precise. But recent versions
 of Visual Studio support using Clang as a compiler, so all the Clang options
@@ -152,19 +199,31 @@ apply.
 * `/sdl`: enables "Strict mode" for `/GS` and additional checks. [doc](https://docs.microsoft.com/en-us/cpp/build/reference/sdl-enable-additional-security-checks?view=msvc-160)
 * `/DYNAMICBASE`: Generate PIE code for ASLR (default on for recent)
 * `/HIGHENTROPYVA`: High entropy ASLR for 64 bits targets. (default on)
+* `/SAFESEH`: Safe Structured Exception Handlers (x86 only) [doc](https://docs.microsoft.com/en-us/cpp/build/reference/safeseh-image-has-safe-exception-handlers?view=msvc-160)
+* `/guard:cf`
+* `/guard:ehcont`
 
 ### Code analysis
 
 Recent versions of Visual Studio support "Code Analysis", as documented here: <https://docs.microsoft.com/en-us/cpp/code-quality/code-analysis-for-c-cpp-overview?view=msvc-160>
+
+`/analyze`
 
 
 ### Sanitizers
 
 Visual Studio 2019 introduced support for ASan, documented here: <https://docs.microsoft.com/en-us/cpp/sanitizers/?view=msvc-160>
 
-The `/fanalyze` command line option is documented here: <https://docs.microsoft.com/en-us/cpp/build/reference/fsanitize?view=msvc-160>
+The `/fsanitize` command line option is documented here: <https://docs.microsoft.com/en-us/cpp/build/reference/fsanitize?view=msvc-160>
 
+Runtime checks (for debug builds): <https://docs.microsoft.com/en-us/cpp/build/reference/rtc-run-time-error-checks?view=msvc-160>
+
+
+### References
+* <https://devblogs.microsoft.com/cppblog/security-features-in-microsoft-visual-c/>
+* <https://docs.microsoft.com/en-us/cpp/build/reference/linker-options?view=msvc-160>
 
 ## References
 
 * <https://github.com/pkolbus/compiler-warnings>
+* <https://outflux.net/slides/2019/lpc/gcc-and-clang.pdf>
