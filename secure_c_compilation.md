@@ -87,15 +87,15 @@ its use may not always be practical.
 GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize` flags, which are often not compatible and thus must be run separately.
 
 * `address`: AddressSanitizer, with extra options available:
- * `pointer-compare `: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
- * `pointer-substract`: Instrument subtraction with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
- * `ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1`
+    * `pointer-compare `: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
+    * `pointer-substract`: Instrument subtraction with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
+    * `ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1`
 * `thread`: ThreadSanitizer, a data race detector.
 * `leak`: memory leak detector for programs which override `malloc` and other allocators.
 * `undefined`: UndefinedBehaviorSanitizer. Checks not enabled by default (GCC 11):
- * `-fsanitize=bounds-strict`
- * `-fsanitize=float-divide-by-zero`
- * `-fsanitize=float-cast-overflow`
+    * `-fsanitize=bounds-strict`
+    * `-fsanitize=float-divide-by-zero`
+    * `-fsanitize=float-cast-overflow`
 
 `kernel-address` also exists and enables AddressSanitizer for the Linux kernel.
 
