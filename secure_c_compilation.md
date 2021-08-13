@@ -195,7 +195,7 @@ apply.
 
 ### Compilation flags
 
-* `/GS`: Checks buffer security [doc](https://docs.microsoft.com/en-us/cpp/build/reference/gs-buffer-security-check?view=msvc-160).
+* `/GS`: Checks buffer security [doc](https://docs.microsoft.com/en-us/cpp/build/reference/gs-buffer-security-check?view=msvc-160). (on by default)
 * `/sdl`: enables "Strict mode" for `/GS` and additional checks. [doc](https://docs.microsoft.com/en-us/cpp/build/reference/sdl-enable-additional-security-checks?view=msvc-160)
 * `/DYNAMICBASE`: Generate PIE code for ASLR (default on for recent)
 * `/HIGHENTROPYVA`: High entropy ASLR for 64 bits targets. (default on)
@@ -226,4 +226,4 @@ Runtime checks (for debug builds): <https://docs.microsoft.com/en-us/cpp/build/r
 ## References
 
 * <https://github.com/pkolbus/compiler-warnings>
-* <https://outflux.net/slides/2019/lpc/gcc-and-clang.pdf>
+
