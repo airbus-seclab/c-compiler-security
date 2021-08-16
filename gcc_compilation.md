@@ -1,4 +1,4 @@
-- [GCC (11)](#gcc-11)
+- [GCC](#gcc)
   - [Warnings](#warnings)
   - [Compilation flags](#compilation-flags)
   - [Runtime sanitizers](#runtime-sanitizers)
@@ -6,7 +6,9 @@
   - [Test files](#test-files)
   - [References](#references)
 
-## GCC (11)
+## GCC
+
+*Note: this guide is valid for GCC 11*
 
 Understanding GCC flags is a *pain*. Which are enabled by `Wall` or `Wextra` is
 not very easy to untangle.

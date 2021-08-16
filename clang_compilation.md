@@ -1,11 +1,13 @@
-- [Clang (12)](#clang-12)
+- [Clang](#clang)
   - [Warnings](#warnings)
   - [Compiler flags](#compiler-flags)
   - [Runtime sanitizers](#runtime-sanitizers)
   - [Code analysis](#code-analysis)
   - [References](#references)
 
-## Clang (12)
+## Clang
+
+*Note: this guide is valid for Clang 12*
 
 Clang compiler flags are described by a domain specific language call
 [TableGen](https://llvm.org/docs/TableGen/index.html), and LLVM includes a tool

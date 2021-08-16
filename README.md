@@ -64,5 +64,7 @@ TODO
 
 ## References
 
-* <https://github.com/pkolbus/compiler-warnings>
+* For [GCC](./gcc_compilation.md#references)
+* For [Clang](./clang_compilation.md#references)
+* <https://github.com/pkolbus/compiler-warnings>: GCC/Clang/XCode parsers for warnings definitions.
 
