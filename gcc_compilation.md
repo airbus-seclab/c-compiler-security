@@ -48,7 +48,7 @@ effective, so I recommend to always use `-O2`.
 * `-Wtraditional-conversion`: Warn of prototypes causing type conversions different from what would happen in the absence of prototype.
 * `-Wshift-overflow=2`: Warn if left shift of a signed value overflows.
 * `-Wcast-qual`: Warn about casts which discard qualifiers.
-* `-Wstringop-overflow=4`: Under the control of Object Size type, warn about buffer overflow in stringmanipulation functions like memcpy and strcpy. 
+* `-Wstringop-overflow=4`: Under the control of Object Size type, warn about buffer overflow in stringmanipulation functions like memcpy and strcpy.
 * `-Wconversion`: Warn for implicit type conversions that may change a value. *Note*: will probably introduce lots of warnings.
 * `-Warith-conversion`: Warn if conversion of the result of arithmetic might change the value even though converting the operands cannot. *Note*: will probably introduce lots of warnings.
 
@@ -112,6 +112,61 @@ Runtime sanitizers are particularly useful when:
 * fuzzing code
 
 as they may uncover runtime errors which would not necessarily trigger a crash.
+
+### Test files
+
+Test files are a great way to understand in detail what is and what is not
+covered by a specific command line flag.
+
+They are located in the
+[gcc/testsuite](https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=gcc/testsuite;hb=HEAD)
+directory, and in the
+[gcc/testsuite/c-c++-common](https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=gcc/testsuite/c-c%2B%2B-common;hb=HEAD)
+and
+[gcc/testsuite/gcc.dg](https://gcc.gnu.org/git/?p=gcc.git;a=tree;f=gcc/testsuite/gcc.dg;hb=HEAD)
+subdirectories in particular.
+
+For example, the test suite for the `-Walloca-larger-than` flag can be found in the following files:
+```
+gcc.dg/Walloca-larger-than-2.c
+gcc.dg/Walloca-larger-than-3.c
+gcc.dg/Walloca-larger-than-3.h
+gcc.dg/Walloca-larger-than.c
+```
+
+
+`Walloca-larger-than.c` gives some insights on how the option behaves in practice:
+
+```C
+/* PR middle-end/82063 - issues with arguments enabled by -Wall
+   { dg-do compile }
+   { dg-require-effective-target alloca }
+   { dg-options "-O2 -Walloca-larger-than=0 -Wvla-larger-than=0 -ftrack-macro-expansion=0" } */
+
+extern void* alloca (__SIZE_TYPE__);
+
+void sink (void*);
+
+#define T(x) sink (x)
+
+void test_alloca (void)
+{
+  /* Verify that alloca(0) is diagnosed even if the limit is zero.  */
+  T (alloca (0));   /* { dg-warning "argument to .alloca. is zero" } */
+  T (alloca (1));   /* { dg-warning "argument to .alloca. is too large" } */
+}
+
+void test_vla (unsigned n)
+{
+  /* VLAs smaller than 32 bytes are optimized into ordinary arrays.  */
+  if (n < 1 || 99 < n)
+    n = 1;
+
+  char a[n];        /* { dg-warning "argument to variable-length array " } */
+  T (a);
+}
+```
+
 
 ### References
 * <https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10>
