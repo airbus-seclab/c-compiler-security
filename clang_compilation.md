@@ -66,8 +66,40 @@ The code should be compiled with `-fsanitize=integer -fsanitize-minimal-runtime 
 
 ### Code analysis
 
-* `scan-build`
-* `DataFlowSanitizer` can be used to develop your own, application specific, code analyzer
+
+#### Clang static analyzer
+
+LLVM has a "modern" static analyser which can be used to analyse whole projects
+and produce HTML reports of the potential problems identified by the tool.
+
+"It implements path-sensitive, inter-procedural analysis based on symbolic execution technique."
+
+[`scan-build`](https://clang-analyzer.llvm.org/scan-build.html) is simple to use and can wrap compilation tools such as `make`. It
+will replace the `CC` and `CXX` env variables to analyse your build and produce
+the report.
+
+```console
+$ scan-build make
+```
+
+The [*default* checkers](https://releases.llvm.org/12.0.0/tools/clang/docs/analyzer/checkers.html)
+are relatively few, and do not really target security, however, "alpha" (which may have many false positives) checkers related to security can be enabled by using the `-enable-checker alpha.security` CLI option.
+
+Other interesting checkers:
+
+* `alpha.core.CastSize`
+* `alpha.core.CastToStruct`
+* `alpha.core.Conversion` (it is relevant when `-Wconversion` is enabled ?)
+* `alpha.core.IdenticalExpr`
+* `alpha.core.PointerArithm`
+* `alpha.core.PointerSub`
+* `alpha.core.SizeofPtr`
+* `alpha.core.TestAfterDivZero`
+* `alpha.unix`, which has a bunch of useful checks
+
+#### Others
+
+* [`DataFlowSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/DataFlowSanitizerDesign.html) can be used to develop your own, application specific, code analyzer.
 
 ### References
 
