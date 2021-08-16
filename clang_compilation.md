@@ -1,3 +1,10 @@
+- [Clang (12)](#clang-12)
+  - [Warnings](#warnings)
+  - [Compiler flags](#compiler-flags)
+  - [Runtime sanitizers](#runtime-sanitizers)
+  - [Code analysis](#code-analysis)
+  - [References](#references)
+
 ## Clang (12)
 
 Clang compiler flags are described by a domain specific language call
@@ -33,10 +40,11 @@ Some other warnings are of interest for security:
 Clang supports various options for stack based buffer overflow protection:
 * `-fstack-protector-strong` (or `-fstack-protector-all)`: enable stack cookies
 * `-fsanitize=safe-stack`: use two stacks ("safe" and "unsafe"), should not impact perfs and can be combined with `-fstack-protector` [Doc](https://clang.llvm.org/docs/SafeStack.html)
-* `-fsanitize=shadow-call-stack`: stronger protection which specific arch support (currently only `Aarch64`)
+* `-fsanitize=shadow-call-stack`: stronger protection which specific arch support (currently only `Aarch64`). [Doc](https://clang.llvm.org/docs/ShadowCallStack.html)
 
 Clang support several mitigations against control flow attacks:
 * `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf)
+* `-fsanitize=cfi`: [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/ControlFlowIntegrity.html)
 
 Other compilation flags:
 * `-fPIE`: generate position-independant code (needed for ASLR)
@@ -45,18 +53,16 @@ Other compilation flags:
 
 ### Runtime sanitizers
 
-LLVM support of sanitizers is first class, besides `AddressSanitizer`, `ThreadSanitizer`, `LeakSanitizer` and `UndefinedBehaviorSanitizer`, which are included in GCC, the following are available:
+LLVM support of sanitizers is first class, besides `AddressSanitizer`, `ThreadSanitizer`, `LeakSanitizer` and `UndefinedBehaviorSanitizer`, which are included in [GCC](./gcc_compilation.md#runtime-sanitizers), the following are available:
 
-* `MemorySanitizer`: MemorySanitizer is a detector of uninitialized reads.
-
-* `-fsanitize=integer`
-* `-fsanitize=cfi`
+* `-fsanitize=memory`: [MemorySanitizer](https://releases.llvm.org/12.0.0/tools/clang/docs/MemorySanitizer.html) is a detector of uninitialized reads.
+* `-fsanitize=integer`: advanced analysis of undefined or risky integer behaviour using UBSan
 
 #### In production
 
-* `-fsanitize=integer`
-* `-fsanitize-minimal-runtime`
-* `-fsanitize-no-recover`
+While most sanitizers are not intended to be used in production builds, UBSan integer's checker is very interesting, as it will detect integer overflows and abort the program.
+
+The code should be compiled with `-fsanitize=integer -fsanitize-minimal-runtime -fsanitize-no-recover`. The performance impact should be reasonable on modern CPUs (~1%).
 
 ### Code analysis
 
