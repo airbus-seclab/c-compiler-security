@@ -39,7 +39,7 @@ Some other warnings are of interest for security:
 
 Clang supports various options for stack based buffer overflow protection:
 * `-fstack-protector-strong` (or `-fstack-protector-all)`: enable stack cookies
-* `-fsanitize=safe-stack`: use two stacks ("safe" and "unsafe"), should not impact perfs and can be combined with `-fstack-protector` [Doc](https://clang.llvm.org/docs/SafeStack.html)
+* `-fsanitize=safe-stack`: use two stacks ("safe" and "unsafe"), should not impact perfs and can be combined with `-fstack-protector` [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/SafeStack.html)
 * `-fsanitize=shadow-call-stack`: stronger protection which specific arch support (currently only `Aarch64`). [Doc](https://clang.llvm.org/docs/ShadowCallStack.html)
 
 Clang support several mitigations against control flow attacks:
