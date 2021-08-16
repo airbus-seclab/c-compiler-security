@@ -163,6 +163,7 @@ LLVM support of sanitizers is first class, besides `AddressSanitizer`, `ThreadSa
 
 * `-fsanitize=integer`
 * `-fsanitize=cfi`
+* `-fsanitize=safe-stack`
 
 #### In production
 
