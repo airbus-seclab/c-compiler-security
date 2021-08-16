@@ -1,8 +1,8 @@
 - [GCC (11)](#gcc-11)
   - [Warnings](#warnings)
   - [Compilation flags](#compilation-flags)
-  - [Code analysis](#code-analysis)
   - [Runtime sanitizers](#runtime-sanitizers)
+  - [Code analysis](#code-analysis)
   - [Test files](#test-files)
   - [References](#references)
 
@@ -78,17 +78,6 @@ Those are not really security options per se, but will catch some logical errors
 * `-fPIE`: generate position-independant code (needed for ASLR)
 * `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf)
 
-### Code analysis
-
-GCC 10 [introduced](https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10)
-the `-fanalyzer` static code analysis tool, which was vastly [improved](https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11) in GCC 11.
-
-It tries to detect memory management issues (double free, use after free,
-etc.), pointers-related problems, etc.
-
-It *is* costly and slows down compilation and also exhibits false positives, so
-its use may not always be practical.
-
 ### Runtime sanitizers
 
 GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize` flags, which are often not compatible and thus must be run separately.
@@ -114,6 +103,18 @@ Runtime sanitizers are particularly useful when:
 * fuzzing code
 
 as they may uncover runtime errors which would not necessarily trigger a crash.
+
+### Code analysis
+
+GCC 10 [introduced](https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10)
+the `-fanalyzer` static code analysis tool, which was vastly [improved](https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11) in GCC 11.
+
+It tries to detect memory management issues (double free, use after free,
+etc.), pointers-related problems, etc.
+
+It *is* costly and slows down compilation and also exhibits false positives, so
+its use may not always be practical.
+
 
 ### Test files
 

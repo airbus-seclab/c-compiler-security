@@ -4,12 +4,12 @@
 
 ### tl;dr
 
-Always use the following flags on the command line, disable the warnings that have too much false positive, after considering the implications:
+Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](./gcc_compilation.md#compilation-flags) on the command line, disable the warnings that have too much false positives, after considering the implications:
 ```
 -O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wtrampolines -Walloca -Wvla -Warray-bounds=2 -Wimplicit-fallthrough=3 -Wtraditional-conversion -Wshift-overflow=2 -Wcast-qual -Wstringop-overflow=4 -Wconversion -Warith-conversion -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wformat-signedness -Wshadow -Wstrict-overflow=4 -Wundef -Wstrict-prototypes -Wswitch-default -Wswitch-enum -Wstack-usage=1000000 -Wcast-align=strict -fstack-protector-strong -fstack-clash-protection -fPIE
 ```
 
-Run debug/test builds with sanitizers (in addition to the flags above):
+Run debug/test builds with [sanitizers](./gcc_compilation.md#runtime-sanitizers) (in addition to the flags above):
 
 Address sanitizer:
 ```
@@ -22,7 +22,9 @@ Detect undefined behaviour (dangerous), can sometimes misbehave when used in com
 -fsanitize=undefined -fsanitize=bounds-strict -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow
 ```
 
-If your program is multi-threaded, run with `-fsanitize=thread` (incompatible with ASan)
+If your program is multi-threaded, run with `-fsanitize=thread` (incompatible with ASan).
+
+Finally, use [`-fanalyzer`](./gcc_compilation.md#code-analysis) to spot potential issues.
 
 ### Details
 
@@ -33,7 +35,18 @@ If your program is multi-threaded, run with `-fsanitize=thread` (incompatible wi
 
 ### tl;dr
 
-TODO
+Fist compile with:
+
+```
+-O2 -Weverything
+```
+and disable the warnings that have too much false positives, after considering the implications:
+
+Run debug/test builds with sanitizers (in addition to the flags above):
+
+Address sanitizer:
+
+
 
 ### Details
 
