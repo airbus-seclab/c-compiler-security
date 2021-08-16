@@ -26,7 +26,7 @@ If your program is multi-threaded, run with `-fsanitize=thread` (incompatible wi
 
 ### Details
 
-[./gcc_compilation.md](Detailed page)
+[Detailed page](./gcc_compilation.md)
 
 
 ## Clang 12
@@ -37,7 +37,7 @@ TODO
 
 ### Details
 
-[./clang_compilation.md](Detailed page)
+[Detailed page](./clang_compilation.md)
 
 ## Microsoft Visual Studio 2019
 
@@ -47,7 +47,7 @@ TODO
 
 ### Details
 
-[./msvc_compilation.md](Detailed page)
+[Detailed page](./msvc_compilation.md)
 
 ## References
 
