@@ -1,8 +1,8 @@
 # Getting the maximum of your C compiler, for security
 
-## GCC 11
+## GCC TL;DR
 
-### tl;dr
+[Detailed page](./gcc_compilation.md)
 
 Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](./gcc_compilation.md#compilation-flags) on the command line, disable the warnings that have too much false positives, after considering the implications:
 ```
@@ -26,14 +26,9 @@ If your program is multi-threaded, run with `-fsanitize=thread` (incompatible wi
 
 Finally, use [`-fanalyzer`](./gcc_compilation.md#code-analysis) to spot potential issues.
 
-### Details
+## Clang TL;DR
 
-[Detailed page](./gcc_compilation.md)
-
-
-## Clang 12
-
-### tl;dr
+[Detailed page](./clang_compilation.md)
 
 Fist compile with:
 
@@ -48,19 +43,14 @@ Address sanitizer:
 
 
 
-### Details
 
-[Detailed page](./clang_compilation.md)
+## Microsoft Visual Studio 2019 TL;DR
 
-## Microsoft Visual Studio 2019
+[Detailed page](./msvc_compilation.md)
 
-### tl;dr
 
 TODO
 
-### Details
-
-[Detailed page](./msvc_compilation.md)
 
 ## References
 
