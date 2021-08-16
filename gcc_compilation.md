@@ -3,6 +3,7 @@
   - [Compilation flags](#compilation-flags)
   - [Code analysis](#code-analysis)
   - [Runtime sanitizers](#runtime-sanitizers)
+  - [Test files](#test-files)
   - [References](#references)
 
 ## GCC (11)
