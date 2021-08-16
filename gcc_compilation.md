@@ -1,3 +1,10 @@
+- [GCC (11)](#gcc-11)
+  - [Warnings](#warnings)
+  - [Compilation flags](#compilation-flags)
+  - [Code analysis](#code-analysis)
+  - [Runtime sanitizers](#runtime-sanitizers)
+  - [References](#references)
+
 ## GCC (11)
 
 Understanding GCC flags is a *pain*. Which are enabled by `Wall` or `Wextra` is
