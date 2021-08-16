@@ -47,6 +47,7 @@ LLVM support of sanitizers is first class, besides `AddressSanitizer`, `ThreadSa
 * `-fsanitize=integer`
 * `-fsanitize=cfi`
 * `-fsanitize=safe-stack`
+* `-fsanitize=shadow-call-stack`
 
 #### In production
 
@@ -66,3 +67,4 @@ LLVM support of sanitizers is first class, besides `AddressSanitizer`, `ThreadSa
 * <https://copperhead.co/blog/memory-disclosure-mitigations/>
 * <https://source.android.com/devices/tech/debug/intsan>
 * <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>
+* <https://clang-analyzer.llvm.org/>

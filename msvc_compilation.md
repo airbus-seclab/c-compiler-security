@@ -37,3 +37,4 @@ Runtime checks (for debug builds): <https://docs.microsoft.com/en-us/cpp/build/r
 ### References
 * <https://devblogs.microsoft.com/cppblog/security-features-in-microsoft-visual-c/>
 * <https://docs.microsoft.com/en-us/cpp/build/reference/linker-options?view=msvc-160>
+* <https://clang.llvm.org/docs/MSVCCompatibility.html>
