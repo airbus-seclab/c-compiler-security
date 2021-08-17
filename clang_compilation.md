@@ -148,3 +148,4 @@ int f(int a) {
 * <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>
 * <https://clang-analyzer.llvm.org/>
 * <https://lld.llvm.org/>
+* <https://blog.quarkslab.com/clang-hardening-cheat-sheet.html>
