@@ -72,7 +72,7 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 
 ## Tips
 
-* Check <https://github.com/pkolbus/compiler-warnings> to see if which compiler version supports a given flag
+* Check <https://github.com/pkolbus/compiler-warnings> to see which compiler version supports a given flag
 * Use the [Compiler explorer](https://godbolt.org/) to experiment and check the impact on machine code produced
 * If you have a doubt about the actual semantics of a flag, check the tests (for Clang, GCC)
 
