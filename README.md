@@ -21,10 +21,8 @@ compile you C Code using GCC, Clang or MSVC, in order to:
 
 Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](./gcc_compilation.md#compilation-flags) on the command line, disable the warnings that have too much false positives, after considering the implications:
 ```
--O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wtrampolines -Walloca -Wvla -Warray-bounds=2 -Wimplicit-fallthrough=3 -Wtraditional-conversion -Wshift-overflow=2 -Wcast-qual -Wstringop-overflow=4 -Wconversion -Warith-conversion -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wformat-signedness -Wshadow -Wstrict-overflow=4 -Wundef -Wstrict-prototypes -Wswitch-default -Wswitch-enum -Wstack-usage=1000000 -Wcast-align=strict -fstack-protector-strong -fstack-clash-protection -fPIE
+-O2 -Wall -Wextra -Wpedantic -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wtrampolines -Walloca -Wvla -Warray-bounds=2 -Wimplicit-fallthrough=3 -Wtraditional-conversion -Wshift-overflow=2 -Wcast-qual -Wstringop-overflow=4 -Wconversion -Warith-conversion -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wformat-signedness -Wshadow -Wstrict-overflow=4 -Wundef -Wstrict-prototypes -Wswitch-default -Wswitch-enum -Wstack-usage=1000000 -Wcast-align=strict -fstack-protector-strong -fstack-clash-protection -fPIE -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
-
-Run debug/test builds with [sanitizers](./gcc_compilation.md#runtime-sanitizers) (in addition to the flags above):
 
 AddressSanitizer + UndefinedBehaviorSanitizer:
 ```
@@ -43,7 +41,7 @@ Finally, use [`-fanalyzer`](./gcc_compilation.md#code-analysis) to spot potentia
 First compile with:
 
 ```
--O2 -Weverything
+-O2 -Weverything -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
 and disable the warnings that have too much false positives, after considering the implications:
 

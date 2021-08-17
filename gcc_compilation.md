@@ -80,6 +80,13 @@ Those are not really security options per se, but will catch some logical errors
 * `-fPIE`: generate position-independant code (needed for ASLR)
 * `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf)
 
+#### Linker flags
+
+* `-Wl,-z,relro`: make the GOT read-only. [Ref](https://www.redhat.com/en/blog/hardening-elf-binaries-using-relocation-read-only-relro)
+* `-Wl,-z,now`: disable lazy binding, making the PLT read-only
+* `-Wl,-z,noexecstack`: Marks the object as not requiring executable stack.
+* `-Wl,-z,separate-code`: separate code from data (default on since binutils 2.31)
+
 ### Runtime sanitizers
 
 GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize` flags, which are often not compatible and thus must be run separately.
@@ -175,3 +182,4 @@ void test_vla (unsigned n)
 * <https://developers.redhat.com/blog/2017/02/22/memory-error-detection-using-gcc>
 * <https://codeforces.com/blog/entry/15547>
 * <https://github.com/google/sanitizers/wiki/AddressSanitizerFlags>
+* <https://sudonull.com/post/6959-ld-z-separate-code>

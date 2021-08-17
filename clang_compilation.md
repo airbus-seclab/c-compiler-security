@@ -53,6 +53,8 @@ Other compilation flags:
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from [stack-clash](https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt) style attacks.
 * `-ftrivial-auto-var-init=pattern`: Auto initialize variables with a random pattern (can be costly ?). `=zero` option is not supported.
 
+Linker flags: see [GCC page](./gcc_compilation.md#linker-flags)
+
 ### Runtime sanitizers
 
 LLVM support of sanitizers is first class, besides [`AddressSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/AddressSanitizer.html), [`ThreadSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/ThreadSanitizer.html), [`LeakSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/LeakSanitizer.html) and [`UndefinedBehaviorSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/UndefinedBehaviorSanitizer.html), which are included in [GCC](./gcc_compilation.md#runtime-sanitizers), the following are available:
@@ -145,3 +147,4 @@ int f(int a) {
 * <https://source.android.com/devices/tech/debug/intsan>
 * <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>
 * <https://clang-analyzer.llvm.org/>
+* <https://lld.llvm.org/>
