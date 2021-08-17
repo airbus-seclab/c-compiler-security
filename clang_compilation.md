@@ -75,7 +75,7 @@ as they may uncover runtime errors which would not necessarily trigger a crash.
 
 While most sanitizers are not intended to be used in production builds, UBSan integer's checker is very interesting, as it will detect integer overflows and abort the program.
 
-The code should be compiled with `-fsanitize=integer -fsanitize-minimal-runtime -fsanitize-no-recover`. The performance impact should be reasonable on modern CPUs (~1%).
+The code should be compiled with `-fsanitize=integer -fsanitize-minimal-runtime -fsanitize-no-recover`. The performance impact should be reasonable on modern CPUs (~1%) [Ref](https://danluu.com/integer-overflow/).
 
 ### Code analysis
 
