@@ -70,6 +70,12 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 * Use ASan with `/fsanitize=address`
 * Analyze your code with `/fanalyze`
 
+## Tips
+
+* Check <https://github.com/pkolbus/compiler-warnings> to see if which compiler version supports a given flag
+* Use the [Compiler explorer](https://godbolt.org/) to experiment and check the impact on machine code produced
+* If you have a doubt about the actual semantics of a flag, check the tests (for Clang, GCC)
+
 ## References
 
 * For [GCC](./gcc_compilation.md#references)
