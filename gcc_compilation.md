@@ -1,10 +1,10 @@
-- [GCC](#gcc)
-  - [Warnings](#warnings)
-  - [Compilation flags](#compilation-flags)
-  - [Runtime sanitizers](#runtime-sanitizers)
-  - [Code analysis](#code-analysis)
-  - [Test files](#test-files)
-  - [References](#references)
+- [Warnings](#warnings)
+- [Compilation flags](#compilation-flags)
+- [Runtime sanitizers](#runtime-sanitizers)
+- [Code analysis](#code-analysis)
+- [Fuzzing](#fuzzing)
+- [Test files](#test-files)
+- [References](#references)
 
 ## GCC
 
@@ -97,15 +97,6 @@ GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize`
 
 `kernel-address` also exists and enables AddressSanitizer for the Linux kernel.
 
-#### Use with fuzzing
-
-Runtime sanitizers are particularly useful when:
-
-* running test suites
-* fuzzing code
-
-as they may uncover runtime errors which would not necessarily trigger a crash.
-
 ### Code analysis
 
 GCC 10 [introduced](https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10)
@@ -117,6 +108,11 @@ etc.), pointers-related problems, etc.
 It *is* costly and slows down compilation and also exhibits false positives, so
 its use may not always be practical.
 
+
+### Fuzzing
+
+While fuzzing is out of scope, you should use [AFL++](https://aflplus.plus/) to
+fuzz your code, with [sanitizers][#runtime-sanitizers] enabled.
 
 ### Test files
 

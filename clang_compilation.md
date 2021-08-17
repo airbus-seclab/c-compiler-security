@@ -1,9 +1,9 @@
-- [Clang](#clang)
-  - [Warnings](#warnings)
-  - [Compiler flags](#compiler-flags)
-  - [Runtime sanitizers](#runtime-sanitizers)
-  - [Code analysis](#code-analysis)
-  - [References](#references)
+- [Warnings](#warnings)
+- [Compiler flags](#compiler-flags)
+- [Runtime sanitizers](#runtime-sanitizers)
+- [Code analysis](#code-analysis)
+- [Fuzzing](#fuzzing)
+- [References](#references)
 
 ## Clang
 
@@ -111,6 +111,31 @@ Other interesting checkers:
 #### Others
 
 * [`DataFlowSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/DataFlowSanitizerDesign.html) can be used to develop your own, application specific, code analyzer.
+
+### Fuzzing
+
+
+While fuzzing is out of scope, you should use fuzz you code with [sanitizers][#runtime-sanitizers] enabled. Options include:
+
+* [libFuzzer](https://llvm.org/docs/LibFuzzer.html) which is included in LLVM and can be easily integrated in a build/test process
+* [AFL++](https://aflplus.plus/)
+
+
+### Test files
+
+Test files are a great way to understand in detail what is and what is not
+covered by a specific command line flag.
+
+They are located in the [`clang/test`](https://github.com/llvm/llvm-project/tree/main/clang/test) directory. For example, the test for `-Wshift-count-negative` can be found in [`clang/test/Sema/warn-shift-negative.c`](https://github.com/llvm/llvm-project/blob/main/clang/test/Sema/warn-shift-negative.c):
+
+```C
+// RUN: %clang_cc1 -fsyntax-only -Wshift-count-negative -fblocks -verify %s
+
+int f(int a) {
+  const int i = -1;
+  return a << i; // expected-warning{{shift count is negative}}
+}
+```
 
 ### References
 

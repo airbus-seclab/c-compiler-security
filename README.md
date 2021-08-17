@@ -1,5 +1,20 @@
 # Getting the maximum of your C compiler, for security
 
+- [GCC TL;DR](#gcc-tldr)
+- [Clang TL;DR](#clang-tldr)
+- [Microsoft Visual Studio 2019 TL;DR](#microsoft-visual-studio-2019-tldr)
+- [References](#references)
+
+### Introduction
+
+This guide is intended to help you determine which flags you should use to
+compile you C Code using GCC, Clang or MSVC, in order to:
+
+* detect the maximum number of bugs or potential security problems.
+* enable security mitigations in the produced binaries.
+* make fuzzing more efficient by enabling runtime sanitizers
+
+
 ## GCC TL;DR
 
 [Detailed page](./gcc_compilation.md)
