@@ -1,3 +1,9 @@
+- [Warnings](#warnings)
+- [Compilation flags](#compilation-flags)
+- [Code analysis](#code-analysis)
+- [Sanitizers](#sanitizers)
+- [References](#references)
+
 ## Microsoft Visual Studio (2019)
 
 As I am not running Windows, this section is less precise. But recent versions
