@@ -78,3 +78,5 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 * <https://github.com/pkolbus/compiler-warnings>: GCC/Clang/XCode parsers for warnings definitions.
 * <https://github.com/google/sanitizers/wiki/AddressSanitizerFlags>: ASan runtime options
 
+
+Written by Raphaël Rigo @ [Airbus Security lab](https://airbus-seclab.github.io), 2021.
