@@ -55,10 +55,19 @@ Other compilation flags:
 
 ### Runtime sanitizers
 
-LLVM support of sanitizers is first class, besides `AddressSanitizer`, `ThreadSanitizer`, `LeakSanitizer` and `UndefinedBehaviorSanitizer`, which are included in [GCC](./gcc_compilation.md#runtime-sanitizers), the following are available:
+LLVM support of sanitizers is first class, besides [`AddressSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/AddressSanitizer.html), [`ThreadSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/ThreadSanitizer.html), [`LeakSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/LeakSanitizer.html) and [`UndefinedBehaviorSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/UndefinedBehaviorSanitizer.html), which are included in [GCC](./gcc_compilation.md#runtime-sanitizers), the following are available:
 
 * `-fsanitize=memory`: [MemorySanitizer](https://releases.llvm.org/12.0.0/tools/clang/docs/MemorySanitizer.html) is a detector of uninitialized reads.
 * `-fsanitize=integer`: advanced analysis of undefined or risky integer behaviour using UBSan
+
+#### Use with fuzzing
+
+Runtime sanitizers are particularly useful when:
+
+* running test suites
+* fuzzing code
+
+as they may uncover runtime errors which would not necessarily trigger a crash.
 
 #### In production
 

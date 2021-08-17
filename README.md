@@ -11,15 +11,10 @@ Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](.
 
 Run debug/test builds with [sanitizers](./gcc_compilation.md#runtime-sanitizers) (in addition to the flags above):
 
-Address sanitizer:
+AddressSanitizer + UndefinedBehaviorSanitizer:
 ```
--fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-substract -fsanitize=LeakSanitizer
+-fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-subtract -fsanitize=leak -fno-omit-frame-pointer -fsanitize=undefined -fsanitize=bounds-strict -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow
 export ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1:detect_invalid_pointer_pairs=2
-```
-
-Detect undefined behaviour (dangerous), can sometimes misbehave when used in combination with ASan:
-```
--fsanitize=undefined -fsanitize=bounds-strict -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow
 ```
 
 If your program is multi-threaded, run with `-fsanitize=thread` (incompatible with ASan).
@@ -30,7 +25,7 @@ Finally, use [`-fanalyzer`](./gcc_compilation.md#code-analysis) to spot potentia
 
 [Detailed page](./clang_compilation.md)
 
-Fist compile with:
+First compile with:
 
 ```
 -O2 -Weverything
@@ -39,22 +34,32 @@ and disable the warnings that have too much false positives, after considering t
 
 Run debug/test builds with sanitizers (in addition to the flags above):
 
-Address sanitizer:
+AddressSanitizer + UndefinedBehaviorSanitizer:
+```
+-fsanitize=address -fsanitize=leak -fno-omit-frame-pointer -fsanitize=undefined -fsanitize=bounds-strict -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fsanitize=integer -fsanitize-no-recover
+export ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1:detect_invalid_pointer_pairs=2
+```
 
+If your program is multi-threaded, run with `-fsanitize=thread` (incompatible with ASan).
 
+Finally, use [`scan-build`](./clang_compilation.md#code-analysis) to spot potential issues.
+
+In addition, you can build production code with `-fsanitize=integer -fsanitize-minimal-runtime -fsanitize-no-recover` to catch integer overflows.
 
 
 ## Microsoft Visual Studio 2019 TL;DR
 
 [Detailed page](./msvc_compilation.md)
 
-
-TODO
-
+* Compile with `/Wall /sdl /guard:cf /guard:ehcont`
+* Use ASan with `/fsanitize=address`
+* Analyze your code with `/fanalyze`
 
 ## References
 
 * For [GCC](./gcc_compilation.md#references)
 * For [Clang](./clang_compilation.md#references)
+* For [MSVC](./msvc_compilation.md#references)
 * <https://github.com/pkolbus/compiler-warnings>: GCC/Clang/XCode parsers for warnings definitions.
+* <https://github.com/google/sanitizers/wiki/AddressSanitizerFlags>: ASan runtime options
 
