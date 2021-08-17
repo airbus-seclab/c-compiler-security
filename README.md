@@ -84,3 +84,8 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 
 
 Written by Raphaël Rigo @ [Airbus Security lab](https://airbus-seclab.github.io), 2021.
+
+This work is licensed under a
+[Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
