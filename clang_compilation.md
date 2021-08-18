@@ -15,11 +15,14 @@ called `llvm-tblgen` which parses the definition files, `DiagnosticsGroups.td` i
 
 ### Warnings
 
-Clang thankfully provides a `-Weverything` option which enables *all* warnings.
-So, I recommend using `-Weverything` and then selectively disable the warnings
-which are not really relevant for your code base.
+While Clang thankfully provides a `-Weverything` option which enables *all*
+warnings, it is [strongly](https://quuxplusone.github.io/blog/2018/12/06/dont-use-weverything/) recommende by Clang developpers *not* to use it in production...
 
-Clang supports the following warnings which are compatible with GCC:
+However, they (and I) recommend using `-Weverything` to identify warnings which
+are relevant for your code base and then selectively add them to your standard
+warning list.
+
+Clang supports the following warnings which are compatible with [GCC](./gcc_compilation.md#warnings):
 
 `-Walloca`,`-Wcast-qual`,`-Wconversion`,`-Wformat=2`,`-Wformat-security`,`-Wlogical-op`,`-Wnull-dereference`,`-Wstack-protector`,`-Wstrict-overflow=3`,`-Wvla`
 
@@ -35,6 +38,13 @@ Some other warnings are of interest for security:
 * `-Wshift-sign-overflow`: warn when left shift overflows into sign bit
 * `-Wswitch-enum`: warn when a switch statement does not handle all enum values
 * `-Wtautological-constant-in-range-compare`: warn about pathological comparisons
+* `-Wassign-enum`: integer constant not in range of enumerated type A
+* `-Wbad-function-cast`: cast from function call of type A to non-matching type B
+* `-Wfloat-equal`: comparing floating point with == or != is unsafe
+* `-Wformat-type-confusion`: format specifies type A but the argument has type B
+* `-Wpointer-arith`: various warnings related to pointer arithmetic
+* `-Widiomatic-parentheses`: using the result of an assignment as a condition without parentheses
+* `-Wunreachable-code-aggressive`: warn about unreachable code
 
 ### Compiler flags
 
