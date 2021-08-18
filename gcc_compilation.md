@@ -42,7 +42,7 @@ effective, so I recommend to always use `-O2`.
 * `-Wformat-security`: check for dangerous format specifiers in *printf (enabled by `-Wformat=2`)
 * `-Wnull-dereference`: Warn if dereferencing a NULL pointer may lead to erroneous or undefined behavior
 * `-Wstack-protector`: Warn when not issuing stack smashing protection for some reason
-* `-Wstrict-overflow=3`
+* `-Wstrict-overflow=3`: Warn when the compiler optimizes based on the assumption that signed overflow does not occur.
 * `-Wtrampolines`: Warn whenever a trampoline is generated (will probably create an executable stack)
 * `-Walloca` or `-Walloca-larger-than=1048576`: don't use `alloca()`, or limit it to "small" sizes
 * `-Wvla` or `-Wvla-larger-than=1048576`: don't use variable length arrays, or limit them to "small" sizes
@@ -65,7 +65,7 @@ Those are not really security options per se, but will catch some logical errors
 
 * `-Wformat-signedness`: Warn about sign differences with format functions.
 * `-Wshadow`: Warn when one variable shadows another.  Same as `-Wshadow=global`
-* `-Wstrict-overflow=4` (or 5)
+* `-Wstrict-overflow=4` (or 5): Warn in more cases.
 * `-Wundef`: Warn if an undefined macro is used in an `#if` directive
 * `-Wstrict-prototypes`: Warn about unprototyped function declarations
 * `-Wswitch-default`: Warn about enumerated switches missing a `default:` statement.
