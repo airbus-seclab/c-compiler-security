@@ -13,7 +13,7 @@
 Understanding GCC flags is a *pain*. Flags which are enabled by `Wall` or `Wextra` are
 not very easy to untangle.
 The most reliable way is to parse and analyze the `commont.opt` and `c.opt`
-files, which define (partially) the command line options which are supported by GCC.
+files, which define (partially) the command line options supported by GCC.
 
 The format is decribed in the GCC internals
 [manual](https://gcc.gnu.org/onlinedocs/gccint/Option-file-format.html#Option-file-format),
