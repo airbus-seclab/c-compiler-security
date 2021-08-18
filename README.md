@@ -8,7 +8,7 @@
 ### Introduction
 
 This guide is intended to help you determine which flags you should use to
-compile you C Code using GCC, Clang or MSVC, in order to:
+compile your C Code using GCC, Clang or MSVC, in order to:
 
 * detect the maximum number of bugs or potential security problems.
 * enable security mitigations in the produced binaries.
