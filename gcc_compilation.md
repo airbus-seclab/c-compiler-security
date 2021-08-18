@@ -10,7 +10,7 @@
 
 *Note: this guide is valid for GCC 11*
 
-Understanding GCC flags is a *pain*. Flags which are enabled by `Wall` or `Wextra` are
+Understanding GCC flags is a *pain*. Which ones are enabled by `-Wall` or `-Wextra` is
 not very easy to untangle.
 The most reliable way is to parse and analyze the `commont.opt` and `c.opt`
 files, which define (partially) the command line options supported by GCC.
