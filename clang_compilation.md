@@ -59,7 +59,7 @@ Clang supports various options for stack based buffer overflow protection and mi
 Other compilation flags:
 * `-fPIE`: generate position-independant code (needed for ASLR)
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from [stack-clash](https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt) style attacks.
-* `-ftrivial-auto-var-init=pattern`: Auto initialize variables with a random pattern (can be costly ?). `=zero` option is not supported.
+* `-ftrivial-auto-var-init=pattern`: Auto initialize variables with a random pattern, which can be costly in some cases. `=zero` option is only supported with `-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang`.
 
 Linker flags: see [GCC page](./gcc_compilation.md#linker-flags)
 
