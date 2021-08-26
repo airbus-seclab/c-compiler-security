@@ -31,13 +31,17 @@ Comments are of course [welcome](https://github.com/airbus-seclab/c-compiler-sec
 
 [Detailed page](./gcc_compilation.md)
 
-Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](./gcc_compilation.md#compilation-flags) on the command line, disable the warnings that have too much false positives, after considering the implications:
+Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](./gcc_compilation.md#compilation-flags) on the command line:
 ```
 -O2
 -Wall -Wextra -Wpedantic -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wtrampolines -Walloca -Wvla -Warray-bounds=2 -Wimplicit-fallthrough=3 -Wtraditional-conversion -Wshift-overflow=2 -Wcast-qual -Wstringop-overflow=4 -Wconversion -Warith-conversion -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wformat-signedness -Wshadow -Wstrict-overflow=4 -Wundef -Wstrict-prototypes -Wswitch-default -Wswitch-enum -Wstack-usage=1000000 -Wcast-align=strict
 -fstack-protector-strong -fstack-clash-protection -fPIE 
 -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
+
+On legacy code bases, some of the warnings may produce some false positives. On
+code where the behavior is intended, pragmas can be used to disable the specific
+warning locally.
 
 AddressSanitizer + UndefinedBehaviorSanitizer:
 ```
@@ -61,7 +65,10 @@ First compile with:
 -fstack-protector-strong -fsanitize=safe-stack -fPIE -fstack-clash-protection
 -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
-and disable the warnings that have too much false positives, after considering the implications:
+
+On legacy code bases, some of the warnings may produce some false positives. On
+code where the behavior is intended, pragmas can be used to disable the specific
+warning locally.
 
 Run debug/test builds with sanitizers (in addition to the flags above):
 
