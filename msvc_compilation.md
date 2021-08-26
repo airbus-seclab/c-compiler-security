@@ -12,7 +12,7 @@ apply.
 
 ### Warnings
 
-*All* warnings can be enabled by by using the `/Wall` option, as documented [here](https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=msvc-160)
+*All* warnings can be enabled by using the `/Wall` option, as documented [here](https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=msvc-160)
 
 ### Compilation flags
 
