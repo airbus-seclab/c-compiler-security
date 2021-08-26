@@ -102,7 +102,8 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 * <https://github.com/google/sanitizers/wiki/AddressSanitizerFlags>: ASan runtime options
 
 
-Written by Raphaël Rigo @ [Airbus Security lab](https://airbus-seclab.github.io), 2021.
+Written by Raphaël Rigo and reviewed by Sarah Zennou @ [Airbus Security lab](https://airbus-seclab.github.io), 2021.
+
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
