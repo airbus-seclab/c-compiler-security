@@ -12,7 +12,7 @@ compile your C Code using GCC, Clang or MSVC, in order to:
 
 * detect the maximum number of bugs or potential security problems.
 * enable security mitigations in the produced binaries.
-* make fuzzing more efficient by enabling runtime sanitizers
+* enable runtime sanitizers to detect errors (overflows, race conditions, etc.) and make fuzzing more efficient.
 
 
 **Disclaimer**:
