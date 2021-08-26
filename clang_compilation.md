@@ -90,7 +90,7 @@ The code should be compiled with `-fsanitize=integer -fsanitize-minimal-runtime 
 
 #### Clang static analyzer
 
-LLVM has a "modern" static analyzer which can be used to analyze whole projects
+Clang has a "modern" static analyzer which can be used to analyze whole projects
 and produce HTML reports of the potential problems identified by the tool.
 
 "It implements path-sensitive, inter-procedural analysis based on symbolic execution technique."
