@@ -127,7 +127,7 @@ Other interesting checkers:
 ### Fuzzing
 
 
-While fuzzing is out of scope, you should use fuzz you code with [sanitizers][#runtime-sanitizers] enabled. Options include:
+While fuzzing is out of scope, you should fuzz your code with [sanitizers][#runtime-sanitizers] enabled. Options include:
 
 * [libFuzzer](https://llvm.org/docs/LibFuzzer.html) which is included in LLVM and can be easily integrated in a build/test process
 * [AFL++](https://aflplus.plus/)
