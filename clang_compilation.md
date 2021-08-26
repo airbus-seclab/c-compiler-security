@@ -37,7 +37,7 @@ Some other warnings are of interest for security:
 * `-Wloop-analysis`: warn about loop variable misuse (double increment, etc.)
 * `-Wshift-sign-overflow`: warn when left shift overflows into sign bit
 * `-Wswitch-enum`: warn when a switch statement does not handle all enum values
-* `-Wtautological-constant-in-range-compare`: warn about pathological comparisons
+* `-Wtautological-constant-in-range-compare`: warn about comparisons which are always `true` or `false` due to the variables value ranges. Ex: "comparison of unsigned expression < 0 is always false".
 * `-Wassign-enum`: integer constant not in range of enumerated type A
 * `-Wbad-function-cast`: cast from function call of type A to non-matching type B
 * `-Wfloat-equal`: comparing floating point with == or != is unsafe
