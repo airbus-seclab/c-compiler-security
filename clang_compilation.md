@@ -29,7 +29,7 @@ Clang supports the following warnings which are compatible with [GCC](./gcc_comp
 Some other warnings are of interest for security:
 
 * `-Wconversion`: which enables a lot of warnings related to implicit conversions, with some which are particularly interesting:
-    * `-Wshorten-64-to-32`: warn on 64 bits truncation (`long` to `int` for example)
+    * `-Wshorten-64-to-32`: warn on 64 bits truncation (`size_t` to `int` on 64bits Linux for example)
 * `-Warray-bounds`: which does not take an argument, contrary to GCC (enabled by default).
 * `-Warray-bounds-pointer-arithmetic`: a more advanced version which takes pointer arithmetic into account.
 * `-Wimplicit-fallthrough`: does not take an argument. Note that Clang does not parse comments and only supports `[[clang::fallthrough]]` and `__attribute__((fallthrough))` annotations.

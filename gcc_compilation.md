@@ -25,8 +25,8 @@ for GCC, Clang and XCode.
 
 ### Warnings
 
-Note that some warnings **depend** on some optimizations to be enabled to be
-effective, so I recommend to always use `-O2`.
+Note that some warnings **depend** on some optimizations to be enabled, so I
+recommend to always use `-O2`.
 
 #### Generic
 
@@ -63,11 +63,11 @@ Those are not really security options per se, but will catch some logical errors
 
 #### Extra flags
 
-* `-Wformat-signedness`: Warn about sign differences with format functions.
-* `-Wshadow`: Warn when one variable shadows another.  Same as `-Wshadow=global`
+* `-Wformat-signedness`: Warn (in format functions) about sign mismatches between the format specifiers and actual parameters.
+* `-Wshadow`: Warn when one variable shadows another.  Same as `-Wshadow=global`.
 * `-Wstrict-overflow=4` (or 5): Warn in more cases.
-* `-Wundef`: Warn if an undefined macro is used in an `#if` directive
-* `-Wstrict-prototypes`: Warn about unprototyped function declarations
+* `-Wundef`: Warn if an undefined macro is used in an `#if` directive.
+* `-Wstrict-prototypes`: Warn about unprototyped function declarations.
 * `-Wswitch-default`: Warn about enumerated switches missing a `default:` statement.
 * `-Wswitch-enum`: Warn about all enumerated switches missing a specific case.
 * `-Wstack-usage=<byte-size>`: Warn if stack usage might exceed `<byte-size>`.
@@ -76,17 +76,17 @@ Those are not really security options per se, but will catch some logical errors
 
 ### Compilation flags
 
-* `-fstack-protector-strong`: add stack cookie checks to functions with stack buffers or pointers
+* `-fstack-protector-strong`: add stack cookie checks to functions with stack buffers or pointers.
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from [stack-clash](https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt) style attacks.
-* `-fPIE`: generate position-independant code (needed for ASLR)
-* `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf)
+* `-fPIE`: generate position-independant code (needed for ASLR).
+* `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf).
 
 #### Linker flags
 
-* `-Wl,-z,relro`: make the GOT read-only. [Ref](https://www.redhat.com/en/blog/hardening-elf-binaries-using-relocation-read-only-relro)
-* `-Wl,-z,now`: disable lazy binding, making the PLT read-only
+* `-Wl,-z,relro`: make the GOT read-only ([Ref](https://www.redhat.com/en/blog/hardening-elf-binaries-using-relocation-read-only-relro)).
+* `-Wl,-z,now`: disable lazy binding, making the PLT read-only.
 * `-Wl,-z,noexecstack`: Marks the object as not requiring executable stack.
-* `-Wl,-z,separate-code`: separate code from data (default on since binutils 2.31)
+* `-Wl,-z,separate-code`: separate code from data (default on since binutils 2.31).
 
 ### Runtime sanitizers
 

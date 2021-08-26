@@ -18,10 +18,10 @@ compile your C Code using GCC, Clang or MSVC, in order to:
 **Disclaimer**:
 
 The flags selected and recommended here were chosen to *maximize* the number of
-warnings which could have a security benefit when enabled. Code generation
-options (such as `-fstack-protector-strong`) can also have performance impacts.
-It is up to you to assess the impact on your code base and choose the right set
-of command line options.
+classes of detected errors which could have a security benefit when enabled.
+Code generation options (such as `-fstack-protector-strong`) can also have
+performance impacts.  It is up to you to assess the impact on your code base
+and choose the right set of command line options.
 
 
 Comments are of course [welcome](https://github.com/airbus-seclab/c-compiler-security/issues).
