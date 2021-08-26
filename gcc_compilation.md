@@ -120,7 +120,7 @@ its use may not always be practical.
 ### Fuzzing
 
 While fuzzing is out of scope, you should use [AFL++](https://aflplus.plus/) to
-fuzz your code, with [sanitizers][#runtime-sanitizers] enabled.
+fuzz your code, with [sanitizers](#runtime-sanitizers) enabled.
 
 ### Test files
 
