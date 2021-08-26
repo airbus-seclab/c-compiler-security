@@ -49,12 +49,10 @@ Some other warnings are of interest for security:
 ### Compiler flags
 
 
-Clang supports various options for stack based buffer overflow protection:
+Clang supports various options for stack based buffer overflow protection and mitigations against control flow attacks:
 * `-fstack-protector-strong` (or `-fstack-protector-all)`: enable stack cookies
-* `-fsanitize=safe-stack`: use two stacks ("safe" and "unsafe"), should not impact perfs and can be combined with `-fstack-protector` [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/SafeStack.html)
+* `-fsanitize=safe-stack`: use two stacks ("safe" and "unsafe"), should not impact perfs and can be combined with `-fstack-protector` [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/SafeStack.html), [Research](https://dslab.epfl.ch/research/cpi/)
 * `-fsanitize=shadow-call-stack`: stronger protection which specific arch support (currently only `Aarch64`). [Doc](https://clang.llvm.org/docs/ShadowCallStack.html)
-
-Clang supports several mitigations against control flow attacks:
 * `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf)
 * `-fsanitize=cfi`: [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/ControlFlowIntegrity.html)
 
