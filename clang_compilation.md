@@ -16,7 +16,7 @@ called `llvm-tblgen` which parses the definition files, `DiagnosticsGroups.td` i
 ### Warnings
 
 While Clang thankfully provides a `-Weverything` option which enables *all*
-warnings, it is [strongly](https://quuxplusone.github.io/blog/2018/12/06/dont-use-weverything/) recommende by Clang developpers *not* to use it in production...
+warnings, it is [strongly](https://quuxplusone.github.io/blog/2018/12/06/dont-use-weverything/) recommended by Clang developpers *not* to use it in production...
 
 However, they (and I) recommend using `-Weverything` to identify warnings which
 are relevant for your code base and then selectively add them to your standard
