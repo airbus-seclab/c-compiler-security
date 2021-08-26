@@ -181,6 +181,6 @@ void test_vla (unsigned n)
 * <https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10>
 * <https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11>
 * <https://developers.redhat.com/blog/2017/02/22/memory-error-detection-using-gcc>
-* <https://codeforces.com/blog/entry/15547>
 * <https://github.com/google/sanitizers/wiki/AddressSanitizerFlags>
-* <https://sudonull.com/post/6959-ld-z-separate-code>
+* <https://sudonull.com/post/6959-ld-z-separate-code>: Description of the `separate-code` option of the GNU linker.
+* <https://codeforces.com/blog/entry/15547>: Describes some lesser known flags
