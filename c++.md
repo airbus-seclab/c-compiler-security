@@ -1,5 +1,7 @@
 ## C++ specific flags
 
+*Note*: work not really started yet
+
 
 ### GCC/Clang
 `_GLIBCXX_SANITIZE_VECTOR`
