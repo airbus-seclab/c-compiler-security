@@ -43,6 +43,7 @@ On legacy code bases, some of the warnings may produce some false positives. On
 code where the behavior is intended, pragmas can be used to disable the specific
 warning locally.
 
+Run debug/test builds with sanitizers (in addition to the flags above):
 AddressSanitizer + UndefinedBehaviorSanitizer:
 ```
 -fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-subtract -fsanitize=leak -fno-omit-frame-pointer -fsanitize=undefined -fsanitize=bounds-strict -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow
