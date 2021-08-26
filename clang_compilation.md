@@ -90,13 +90,13 @@ The code should be compiled with `-fsanitize=integer -fsanitize-minimal-runtime 
 
 #### Clang static analyzer
 
-LLVM has a "modern" static analyser which can be used to analyse whole projects
+LLVM has a "modern" static analyzer which can be used to analyze whole projects
 and produce HTML reports of the potential problems identified by the tool.
 
 "It implements path-sensitive, inter-procedural analysis based on symbolic execution technique."
 
 [`scan-build`](https://clang-analyzer.llvm.org/scan-build.html) is simple to use and can wrap compilation tools such as `make`. It
-will replace the `CC` and `CXX` env variables to analyse your build and produce
+will replace the `CC` and `CXX` env variables to analyze your build and produce
 the report.
 
 ```console
