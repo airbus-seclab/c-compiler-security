@@ -15,7 +15,7 @@ not very easy to untangle.
 The most reliable way is to parse and analyze the `commont.opt` and `c.opt`
 files, which define (partially) the command line options supported by GCC.
 
-The format is decribed in the GCC internals
+The format is described in the GCC internals
 [manual](https://gcc.gnu.org/onlinedocs/gccint/Option-file-format.html#Option-file-format),
 so I've written a partial [parser][./gcc_copt_inclusions.py] which can help
 identify what flags are needed.
@@ -78,7 +78,7 @@ Those are not really security options per se, but will catch some logical errors
 
 * `-fstack-protector-strong`: add stack cookie checks to functions with stack buffers or pointers.
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from [stack-clash](https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt) style attacks.
-* `-fPIE`: generate position-independant code (needed for ASLR).
+* `-fPIE`: generate position-independent code (needed for ASLR).
 * `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf).
 
 #### Linker flags
@@ -93,8 +93,8 @@ Those are not really security options per se, but will catch some logical errors
 GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize` flags, which are often not compatible and thus must be run separately.
 
 * `address`: AddressSanitizer, with extra options available:
-    * `pointer-compare`: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
-    * `pointer-subtract`: Instrument subtraction with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
+    * `pointer-compare`: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` environment var.
+    * `pointer-subtract`: Instrument subtraction with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` environment var.
     * `ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1`
 * `thread`: ThreadSanitizer, a data race detector.
 * `leak`: memory leak detector for programs which override `malloc` and other allocators.

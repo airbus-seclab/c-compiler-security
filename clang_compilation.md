@@ -57,7 +57,7 @@ Clang supports various options for stack based buffer overflow protection and mi
 * `-fsanitize=cfi`: [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/ControlFlowIntegrity.html)
 
 Other compilation flags:
-* `-fPIE`: generate position-independant code (needed for ASLR)
+* `-fPIE`: generate position-independent code (needed for ASLR)
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from [stack-clash](https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt) style attacks.
 * `-ftrivial-auto-var-init=pattern`: Auto initialize variables with a random pattern, which can be costly in some cases. `=zero` option is only supported with `-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang`.
 
@@ -68,7 +68,7 @@ Linker flags: see [GCC page](./gcc_compilation.md#linker-flags)
 LLVM support of sanitizers is first class, besides [`AddressSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/AddressSanitizer.html), [`ThreadSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/ThreadSanitizer.html), [`LeakSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/LeakSanitizer.html) and [`UndefinedBehaviorSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/UndefinedBehaviorSanitizer.html), which are included in [GCC](./gcc_compilation.md#runtime-sanitizers), the following are available:
 
 * `-fsanitize=memory`: [MemorySanitizer](https://releases.llvm.org/12.0.0/tools/clang/docs/MemorySanitizer.html) is a detector of uninitialized reads.
-* `-fsanitize=integer`: advanced analysis of undefined or risky integer behaviour using UBSan
+* `-fsanitize=integer`: advanced analysis of undefined or risky integer behavior using UBSan
 
 #### Use with fuzzing
 
@@ -96,7 +96,7 @@ and produce HTML reports of the potential problems identified by the tool.
 "It implements path-sensitive, inter-procedural analysis based on symbolic execution technique."
 
 [`scan-build`](https://clang-analyzer.llvm.org/scan-build.html) is simple to use and can wrap compilation tools such as `make`. It
-will replace the `CC` and `CXX` env variables to analyze your build and produce
+will replace the `CC` and `CXX` environment variables to analyze your build and produce
 the report.
 
 ```console
