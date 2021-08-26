@@ -72,6 +72,7 @@ Those are not really security options per se, but will catch some logical errors
 * `-Wswitch-enum`: Warn about all enumerated switches missing a specific case.
 * `-Wstack-usage=<byte-size>`: Warn if stack usage might exceed `<byte-size>`.
 * `-Wcast-align=strict`: Warn about pointer casts which increase alignment.
+* `-Wjump-misses-init`: Warn when a jump misses a variable initialization.
 
 ### Compilation flags
 
