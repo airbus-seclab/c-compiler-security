@@ -33,31 +33,31 @@ Some other warnings are of interest for security:
 * `-Warray-bounds`: which does not take an argument, contrary to GCC (enabled by default).
 * `-Warray-bounds-pointer-arithmetic`: a more advanced version which takes pointer arithmetic into account.
 * `-Wimplicit-fallthrough`: does not take an argument. Note that Clang does not parse comments and only supports `[[clang::fallthrough]]` and `__attribute__((fallthrough))` annotations.
-* `-Wconditional-uninitialized`: warn if a variable may be uninitialized depending on a conditional branch
-* `-Wloop-analysis`: warn about loop variable misuse (double increment, etc.)
-* `-Wshift-sign-overflow`: warn when left shift overflows into sign bit
-* `-Wswitch-enum`: warn when a switch statement does not handle all enum values
+* `-Wconditional-uninitialized`: warn if a variable may be uninitialized depending on a conditional branch.
+* `-Wloop-analysis`: warn about loop variable misuse (double increment, etc.).
+* `-Wshift-sign-overflow`: warn when left shift overflows into sign bit.
+* `-Wswitch-enum`: warn when a switch statement does not handle all enum values.
 * `-Wtautological-constant-in-range-compare`: warn about comparisons which are always `true` or `false` due to the variables value ranges. Ex: `comparison of unsigned expression < 0 is always false`.
-* `-Wassign-enum`: integer constant not in range of enumerated type A
-* `-Wbad-function-cast`: cast from function call of type A to non-matching type B
-* `-Wfloat-equal`: comparing floating point with == or != is unsafe
-* `-Wformat-type-confusion`: format specifies type A but the argument has type B
-* `-Wpointer-arith`: various warnings related to pointer arithmetic
-* `-Widiomatic-parentheses`: using the result of an assignment as a condition without parentheses
-* `-Wunreachable-code-aggressive`: warn about unreachable code
+* `-Wassign-enum`: integer constant not in range of enumerated type A.
+* `-Wbad-function-cast`: cast from function call of type A to non-matching type B.
+* `-Wfloat-equal`: comparing floating point with == or != is unsafe.
+* `-Wformat-type-confusion`: format specifies type A but the argument has type B.
+* `-Wpointer-arith`: various warnings related to pointer arithmetic.
+* `-Widiomatic-parentheses`: using the result of an assignment as a condition without parentheses.
+* `-Wunreachable-code-aggressive`: warn about unreachable code.
 
 ### Compiler flags
 
 
 Clang supports various options for stack based buffer overflow protection and mitigations against control flow attacks:
-* `-fstack-protector-strong` (or `-fstack-protector-all)`: enable stack cookies
-* `-fsanitize=safe-stack`: use two stacks ("safe" and "unsafe"), should not impact perfs and can be combined with `-fstack-protector` [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/SafeStack.html), [Research](https://dslab.epfl.ch/research/cpi/)
-* `-fsanitize=shadow-call-stack`: stronger protection which specific arch support (currently only `Aarch64`). [Doc](https://clang.llvm.org/docs/ShadowCallStack.html)
-* `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf)
-* `-fsanitize=cfi`: [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/ControlFlowIntegrity.html)
+* `-fstack-protector-strong` (or `-fstack-protector-all)`: enable stack cookies.
+* `-fsanitize=safe-stack`: use two stacks ("safe" and "unsafe"), should not impact performance and can be combined with `-fstack-protector` [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/SafeStack.html), [Research](https://dslab.epfl.ch/research/cpi/).
+* `-fsanitize=shadow-call-stack`: stronger protection which specific arch support (currently only `Aarch64`). [Doc](https://clang.llvm.org/docs/ShadowCallStack.html).
+* `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf).
+* `-fsanitize=cfi`: ControlFlowIntegrity. [Doc](https://releases.llvm.org/12.0.0/tools/clang/docs/ControlFlowIntegrity.html).
 
 Other compilation flags:
-* `-fPIE`: generate position-independent code (needed for ASLR)
+* `-fPIE`: generate position-independent code (needed for ASLR).
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from [stack-clash](https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt) style attacks.
 * `-ftrivial-auto-var-init=pattern`: Auto initialize variables with a random pattern, which can be costly in some cases. `=zero` option is only supported with `-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang`.
 
@@ -68,14 +68,14 @@ Linker flags: see [GCC page](./gcc_compilation.md#linker-flags)
 LLVM support of sanitizers is first class, besides [`AddressSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/AddressSanitizer.html), [`ThreadSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/ThreadSanitizer.html), [`LeakSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/LeakSanitizer.html) and [`UndefinedBehaviorSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/UndefinedBehaviorSanitizer.html), which are included in [GCC](./gcc_compilation.md#runtime-sanitizers), the following are available:
 
 * `-fsanitize=memory`: [MemorySanitizer](https://releases.llvm.org/12.0.0/tools/clang/docs/MemorySanitizer.html) is a detector of uninitialized reads.
-* `-fsanitize=integer`: advanced analysis of undefined or risky integer behavior using UBSan
+* `-fsanitize=integer`: advanced analysis of undefined or risky integer behavior using UBSan.
 
 #### Use with fuzzing
 
 Runtime sanitizers are particularly useful when:
 
-* running test suites
-* fuzzing code
+* running test suites,
+* fuzzing code,
 
 as they may uncover runtime errors which would not necessarily trigger a crash.
 
@@ -127,8 +127,8 @@ Other interesting checkers:
 
 While fuzzing is out of scope, you should fuzz your code with [sanitizers][#runtime-sanitizers] enabled. Options include:
 
-* [libFuzzer](https://llvm.org/docs/LibFuzzer.html) which is included in LLVM and can be easily integrated in a build/test process
-* [AFL++](https://aflplus.plus/)
+* [libFuzzer](https://llvm.org/docs/LibFuzzer.html) which is included in LLVM and can be easily integrated in a build/test process.
+* [AFL++](https://aflplus.plus/).
 
 
 ### Test files
@@ -149,11 +149,11 @@ int f(int a) {
 
 ### References
 
-* <https://releases.llvm.org/12.0.0/tools/clang/docs/DiagnosticsReference.html>
-* <https://releases.llvm.org/12.0.0/tools/clang/docs/index.html>
-* <https://copperhead.co/blog/memory-disclosure-mitigations/>
-* <https://source.android.com/devices/tech/debug/intsan>
-* <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>
-* <https://clang-analyzer.llvm.org/>
-* <https://lld.llvm.org/>
-* <https://blog.quarkslab.com/clang-hardening-cheat-sheet.html>
+* <https://releases.llvm.org/12.0.0/tools/clang/docs/DiagnosticsReference.html>: All Clang warnings listed and "documented".
+* <https://releases.llvm.org/12.0.0/tools/clang/docs/index.html>: Clang documentation
+* <https://copperhead.co/blog/memory-disclosure-mitigations/>: Uses of sanitizers and hardening options in Android CopperheadOs
+* <https://source.android.com/devices/tech/debug/intsan>: Android use of UBSan in production builds to mitigate integer overflows.
+* <https://security.googleblog.com/2019/05/queue-hardening-enhancements.html>: Information about other hardening options in Android
+* <https://clang-analyzer.llvm.org/>: Doc for `scan-build`
+* <https://lld.llvm.org/>: The LLVM linker documentation.
+* <https://blog.quarkslab.com/clang-hardening-cheat-sheet.html>: Quarkslab recommnendations for Clang hardening flags.

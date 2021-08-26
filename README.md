@@ -111,6 +111,9 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 
 Written by Raphaël Rigo and reviewed by Sarah Zennou @ [Airbus Security lab](https://airbus-seclab.github.io), 2021.
 
+## Contributing
+
+Please open an issue if you notice any error, imprecision or have comments or improvements ideas.
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
