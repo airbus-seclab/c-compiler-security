@@ -92,7 +92,7 @@ Those are not really security options per se, but will catch some logical errors
 GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize` flags, which are often not compatible and thus must be run separately.
 
 * `address`: AddressSanitizer, with extra options available:
-    * `pointer-compare `: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
+    * `pointer-compare`: Instrument comparison operation with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
     * `pointer-subtract`: Instrument subtraction with pointer operands. Must be enabled at runtime by using `detect_invalid_pointer_pairs=2` in the `ASAN_OPTIONS` env var.
     * `ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1`
 * `thread`: ThreadSanitizer, a data race detector.
