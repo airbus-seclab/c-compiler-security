@@ -17,7 +17,7 @@ files, which define (partially) the command line options supported by GCC.
 
 The format is described in the GCC internals
 [manual](https://gcc.gnu.org/onlinedocs/gccint/Option-file-format.html#Option-file-format),
-so I've written a partial [parser][./gcc_copt_inclusions.py] which can help
+so I've written a partial [parser](./gcc_copt_inclusions.py) which can help
 identify what flags are needed.
 You *should* also check the
 [compiler-warnings](https://github.com/pkolbus/compiler-warnings) project, which has a real parser
