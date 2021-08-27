@@ -26,13 +26,14 @@ Check the following documentation pages for reference:
 
 ### Compilation flags
 
-* `/GS`: Checks buffer security [doc](https://docs.microsoft.com/en-us/cpp/build/reference/gs-buffer-security-check?view=msvc-160). (on by default)
+* `/GS`: Checks buffer security [doc](https://docs.microsoft.com/en-us/cpp/build/reference/gs-buffer-security-check?view=msvc-160) (on by default).
 * `/sdl`: enables "Strict mode" for `/GS` and additional checks. [doc](https://docs.microsoft.com/en-us/cpp/build/reference/sdl-enable-additional-security-checks?view=msvc-160)
-* `/DYNAMICBASE`: Generate PIE code for ASLR (default on for recent)
-* `/HIGHENTROPYVA`: High entropy ASLR for 64 bits targets. (default on)
+* `/DYNAMICBASE`: Generate PIE code for ASLR (default on for recent).
+* `/HIGHENTROPYVA`: High entropy ASLR for 64 bits targets (default on).
 * `/SAFESEH`: Safe Structured Exception Handlers (x86 only) [doc](https://docs.microsoft.com/en-us/cpp/build/reference/safeseh-image-has-safe-exception-handlers?view=msvc-160)
 * `/guard:cf`
 * `/guard:ehcont`
+* `/CETCOMPAT`: Mark the binary as compatible with Intel CET. [doc](https://docs.microsoft.com/en-us/cpp/build/reference/cetcompat?view=msvc-160).
 
 ### Code analysis
 
