@@ -10,6 +10,16 @@ As I am not running Windows, this section is less precise. But recent versions
 of Visual Studio support using Clang as a compiler, so all the Clang options
 apply.
 
+### Note about the GUI
+
+The flags described here are those you can set on the command line. Some options can be changed directly in the GUI.
+Check the following documentation pages for reference:
+
+* C/C++ project [properties](https://docs.microsoft.com/en-us/cpp/build/reference/c-cpp-prop-page?view=msvc-160)
+* Linker [properties](https://docs.microsoft.com/en-us/cpp/build/reference/linker-property-pages?view=msvc-160)
+* Setting [project properties](https://docs.microsoft.com/en-us/cpp/build/working-with-project-properties?view=msvc-160)
+
+
 ### Warnings
 
 *All* warnings can be enabled by using the `/Wall` option, as documented [here](https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=msvc-160)
