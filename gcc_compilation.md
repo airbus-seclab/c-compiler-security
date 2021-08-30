@@ -61,6 +61,9 @@ Those are not really security options per se, but will catch some logical errors
 * `-Wduplicated-cond`: Warn about duplicated conditions in an if-else-if chain.
 * `-Wduplicated-branches`: Warn about duplicated branches in if-else statements.
 
+*Note*: You can disable warnings for system includes by using the `-isystem`
+option to specify the paths which will be used for "system" includes (`#include <file.h>`).
+
 #### Extra flags
 
 * `-Wformat-signedness`: Warn (in format functions) about sign mismatches between the format specifiers and actual parameters.

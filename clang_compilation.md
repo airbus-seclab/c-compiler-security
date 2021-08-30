@@ -46,7 +46,8 @@ Some other warnings are of interest for security:
 * `-Widiomatic-parentheses`: using the result of an assignment as a condition without parentheses.
 * `-Wunreachable-code-aggressive`: warn about unreachable code.
 
-*Note*: You can disable warnings for system includes by using the `-isystem` option to specify pathsj
+*Note*: You can disable warnings for system includes by using the `-isystem`
+option to specify the paths which will be used for "system" includes (`#include <file.h>`).
 
 ### Compiler flags
 
