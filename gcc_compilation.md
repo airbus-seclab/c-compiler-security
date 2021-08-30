@@ -30,8 +30,9 @@ recommend to always use `-O2`.
 
 #### Generic
 
-* `-Wall`: enable "most" of warnings by default
-* `-Wextra`: enable *more* warnings by default
+* `-Werror`: treat warnings as errors.
+* `-Wall`: enable "most" of warnings by default.
+* `-Wextra`: enable *more* warnings by default.
 * `-Wpedantic`: and even more.
 
 #### Security warnings
