@@ -46,6 +46,8 @@ Some other warnings are of interest for security:
 * `-Widiomatic-parentheses`: using the result of an assignment as a condition without parentheses.
 * `-Wunreachable-code-aggressive`: warn about unreachable code.
 
+*Note*: You can disable warnings for system includes by using the `-isystem` option to specify pathsj
+
 ### Compiler flags
 
 
@@ -61,7 +63,8 @@ Other compilation flags:
 * `-fstack-clash-protection`: Insert code to probe each page of stack space as it is allocated to protect from [stack-clash](https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt) style attacks.
 * `-ftrivial-auto-var-init=pattern`: Auto initialize variables with a random pattern, which can be costly in some cases. `=zero` option is only supported with `-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang`.
 
-Linker flags: see [GCC page](./gcc_compilation.md#linker-flags)
+* Glibc flags: see [GCC page](./gcc_compilation.md#glibc-flags)
+* Linker flags: see [GCC page](./gcc_compilation.md#linker-flags)
 
 ### Runtime sanitizers
 

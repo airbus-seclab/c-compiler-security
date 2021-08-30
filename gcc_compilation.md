@@ -81,6 +81,10 @@ Those are not really security options per se, but will catch some logical errors
 * `-fPIE`: generate position-independent code (needed for ASLR).
 * `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf).
 
+#### Glibc flags
+
+* `-D_FORTIFY_SOURCE=2` will enable additional security features of the GNU libc when calling memory and string handling functions [Ref](https://man7.org/linux/man-pages/man7/feature_test_macros.7.html).
+
 #### Linker flags
 
 * `-Wl,-z,relro`: make the GOT read-only ([Ref](https://www.redhat.com/en/blog/hardening-elf-binaries-using-relocation-read-only-relro)).

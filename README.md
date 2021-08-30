@@ -35,6 +35,7 @@ Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](.
 ```
 -O2
 -Wall -Wextra -Wpedantic -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wtrampolines -Walloca -Wvla -Warray-bounds=2 -Wimplicit-fallthrough=3 -Wtraditional-conversion -Wshift-overflow=2 -Wcast-qual -Wstringop-overflow=4 -Wconversion -Warith-conversion -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wformat-signedness -Wshadow -Wstrict-overflow=4 -Wundef -Wstrict-prototypes -Wswitch-default -Wswitch-enum -Wstack-usage=1000000 -Wcast-align=strict
+-D_FORTIFY_SOURCE=2
 -fstack-protector-strong -fstack-clash-protection -fPIE 
 -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
@@ -63,6 +64,7 @@ First compile with:
 ```
 -O2
 -Walloca -Wcast-qual -Wconversion -Wformat=2 -Wformat-security -Wlogical-op -Wnull-dereference -Wstack-protector -Wstrict-overflow=3 -Wvla -Warray-bounds -Warray-bounds-pointer-arithmetic -Wassign-enum -Wbad-function-cast -Wconditional-uninitialized -Wconversion -Wfloat-equal -Wformat-type-confusion -Widiomatic-parentheses -Wimplicit-fallthrough -Wloop-analysis -Wpointer-arith -Wshift-sign-overflow -Wshorten-64-to-32 -Wswitch-enum -Wtautological-constant-in-range-compare -Wunreachable-code-aggressive 
+-D_FORTIFY_SOURCE=2
 -fstack-protector-strong -fsanitize=safe-stack -fPIE -fstack-clash-protection
 -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
