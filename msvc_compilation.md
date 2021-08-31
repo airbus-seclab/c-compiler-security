@@ -22,7 +22,9 @@ Check the following documentation pages for reference:
 
 ### Warnings
 
-*All* warnings can be enabled by using the `/Wall` option, as documented [here](https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=msvc-160)
+*All* warnings can be enabled by using the `/Wall` option, as documented [](https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=msvc-160).
+
+*Note*: The `/W4` option does **not** enable all "level 4" warnings: `/W4 displays level 1, level 2, and level 3 warnings, and all level 4 (informational) warnings that aren't off by default.`. So, you have to use `/Wall` and disable the ones that are not relevant.
 
 As with GCC and Clang, MSVC supports disabling warnings for "external" headers, by using the `/external` option, documented [here](https://docs.microsoft.com/en-us/cpp/build/reference/external-external-headers-diagnostics?view=msvc-160). For example: `/external:anglebrackets /external:W3` will lower warnings to `W3` for headers included through `<>`.
 
@@ -36,6 +38,7 @@ As with GCC and Clang, MSVC supports disabling warnings for "external" headers, 
 * `/guard:cf`
 * `/guard:ehcont`
 * `/CETCOMPAT`: Mark the binary as compatible with Intel CET. [doc](https://docs.microsoft.com/en-us/cpp/build/reference/cetcompat?view=msvc-160).
+* `/QSpectre` and `/Qspectre-load` can be used to produce code which mitigates the Spectre vulnerabilities on Intel and AMD. Read the [doc](https://docs.microsoft.com/en-us/cpp/build/reference/qspectre?view=msvc-160) before enabling.
 
 ### Code analysis
 
