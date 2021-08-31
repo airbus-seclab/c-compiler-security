@@ -25,7 +25,7 @@ warning list.
 Clang supports the following warnings which are compatible with [GCC](./gcc_compilation.md#warnings):
 
 * the obvious `-Wall`, `-Wextra`, `-Wpedantic` and `-Werror`.
-* `-Walloca`,`-Wcast-qual`,`-Wconversion`,`-Wformat=2`,`-Wformat-security`,`-Wlogical-op`,`-Wnull-dereference`,`-Wstack-protector`,`-Wstrict-overflow=3`,`-Wvla`.
+* `-Walloca`,`-Wcast-qual`,`-Wconversion`,`-Wformat=2`,`-Wformat-security`,`-Wnull-dereference`,`-Wstack-protector`,`-Wstrict-overflow=3`,`-Wvla`.
 
 Some other warnings are of interest for security:
 
