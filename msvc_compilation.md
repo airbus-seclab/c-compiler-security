@@ -24,6 +24,8 @@ Check the following documentation pages for reference:
 
 *All* warnings can be enabled by using the `/Wall` option, as documented [here](https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=msvc-160)
 
+As with GCC and Clang, MSVC supports disabling warnings for "external" headers, by using the `/external` option, documented [here](https://docs.microsoft.com/en-us/cpp/build/reference/external-external-headers-diagnostics?view=msvc-160). For example: `/external:anglebrackets /external:W3` will lower warnings to `W3` for headers included through `<>`.
+
 ### Compilation flags
 
 * `/GS`: Checks buffer security [doc](https://docs.microsoft.com/en-us/cpp/build/reference/gs-buffer-security-check?view=msvc-160) (on by default).
