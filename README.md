@@ -94,7 +94,7 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 
 [Detailed page](./msvc_compilation.md)
 
-* Compile with `/Wall /sdl /guard:cf /guard:ehcont`
+* Compile with `/Wall /sdl /guard:cf /guard:ehcont /CETCOMPAT`
 * Use ASan with `/fsanitize=address`
 * Analyze your code with `/fanalyze`
 
