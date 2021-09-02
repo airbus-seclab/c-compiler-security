@@ -96,7 +96,7 @@ In addition, you can build production code with `-fsanitize=integer -fsanitize-m
 
 * Compile with `/Wall /sdl /guard:cf /guard:ehcont /CETCOMPAT`
 * Use ASan with `/fsanitize=address`
-* Analyze your code with `/fanalyze`
+* Analyze your code with `/analyze`
 
 ## Tips
 
