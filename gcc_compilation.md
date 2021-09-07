@@ -30,10 +30,10 @@ recommend to always use `-O2`.
 
 #### Generic
 
-* `-Werror`: treat warnings as errors.
 * `-Wall`: enable "most" of warnings by default.
 * `-Wextra`: enable *more* warnings by default.
 * `-Wpedantic`: and even more.
+* `-Werror`: treat warnings as errors. *Note:* this should only be used on manual builds to [avoid](https://flameeyes.blog/2009/02/25/future-proof-your-code-dont-use-werror/) problems in the future.
 
 #### Security warnings
 
