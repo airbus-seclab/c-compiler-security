@@ -73,7 +73,7 @@ Other compilation flags:
 LLVM support of sanitizers is first class, besides [`AddressSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/AddressSanitizer.html), [`ThreadSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/ThreadSanitizer.html), [`LeakSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/LeakSanitizer.html) and [`UndefinedBehaviorSanitizer`](https://releases.llvm.org/12.0.0/tools/clang/docs/UndefinedBehaviorSanitizer.html), which are included in [GCC](./gcc_compilation.md#runtime-sanitizers), the following are available:
 
 * `-fsanitize=memory`: [MemorySanitizer](https://releases.llvm.org/12.0.0/tools/clang/docs/MemorySanitizer.html) is a detector of uninitialized reads.
-* `-fsanitize=integer`: advanced analysis of undefined or risky integer behavior using UBSan.
+* `-fsanitize=integer`: advanced analysis of undefined or risky integer behavior using UBSan. Note that this [enables](https://releases.llvm.org/12.0.0/tools/clang/docs/UndefinedBehaviorSanitizer.html#available-checks) detection of *legit* (per the C langage spec) detection of *unsigned* integer overflows. Instrumentation can be disabled on functions where overflowing is expected by using `__attribute__((no_sanitize("unsigned-integer-overflow")))`. Ditto with `unsigned-shift-base`.
 
 #### Use with fuzzing
 
