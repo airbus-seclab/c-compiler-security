@@ -25,7 +25,7 @@ warning list.
 Clang supports the following warnings which are compatible with [GCC](./gcc_compilation.md#warnings):
 
 * the obvious `-Wall`, `-Wextra`, `-Wpedantic` and `-Werror` ([Note](https://flameeyes.blog/2009/02/25/future-proof-your-code-dont-use-werror/)).
-* `-Walloca`,`-Wcast-qual`,`-Wconversion`,`-Wformat=2`,`-Wformat-security`,`-Wnull-dereference`,`-Wstack-protector`,`-Wstrict-overflow=3`,`-Wvla`.
+* `-Walloca`,`-Wcast-qual`,`-Wconversion`,`-Wformat=2`,`-Wformat-security`,`-Wnull-dereference`,`-Wstack-protector`,`-Wvla`.
 
 Some other warnings are of interest for security:
 
@@ -39,6 +39,7 @@ Some other warnings are of interest for security:
 * `-Wshift-sign-overflow`: warn when left shift overflows into sign bit.
 * `-Wswitch-enum`: warn when a switch statement does not handle all enum values.
 * `-Wtautological-constant-in-range-compare`: warn about comparisons which are always `true` or `false` due to the variables value ranges. Ex: `comparison of unsigned expression < 0 is always false`.
+* `-Wcomma`: warn about possible comma misuse.
 * `-Wassign-enum`: integer constant not in range of enumerated type A.
 * `-Wbad-function-cast`: cast from function call of type A to non-matching type B.
 * `-Wfloat-equal`: comparing floating point with == or != is unsafe.
@@ -46,6 +47,7 @@ Some other warnings are of interest for security:
 * `-Wpointer-arith`: various warnings related to pointer arithmetic.
 * `-Widiomatic-parentheses`: using the result of an assignment as a condition without parentheses.
 * `-Wunreachable-code-aggressive`: warn about unreachable code.
+* `-Wthread-safety` and `-Wthread-safety-beta`: warn about potential threading/race condition issues.
 
 *Note*: You can disable warnings for system includes by using the `-isystem`
 option to specify the paths which will be used for "system" includes (`#include <file.h>`).
