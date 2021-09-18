@@ -79,7 +79,7 @@ Run debug/test builds with sanitizers (in addition to the flags above):
 
 AddressSanitizer + UndefinedBehaviorSanitizer:
 ```
--fsanitize=address -fsanitize=leak -fno-omit-frame-pointer -fsanitize=undefined -fsanitize=bounds-strict -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fsanitize=integer -fsanitize-no-recover
+-fsanitize=address -fsanitize=leak -fno-omit-frame-pointer -fsanitize=undefined  -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fsanitize=integer
 export ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1:detect_invalid_pointer_pairs=2
 ```
 
@@ -87,7 +87,7 @@ If your program is multi-threaded, run with `-fsanitize=thread` (incompatible wi
 
 Finally, use [`scan-build`](./clang_compilation.md#code-analysis) to spot potential issues.
 
-In addition, you can build production code with `-fsanitize=integer -fsanitize-minimal-runtime -fsanitize-no-recover` to catch integer overflows.
+In addition, you can build production code with `-fsanitize=integer -fsanitize-minimal-runtime -fno-sanitize-recover` to catch integer overflows.
 
 
 ## Microsoft Visual Studio 2019 TL;DR
