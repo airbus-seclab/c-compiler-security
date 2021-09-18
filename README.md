@@ -75,7 +75,7 @@ On legacy code bases, some of the warnings may produce some false positives. On
 code where the behavior is intended, pragmas can be used to disable the specific
 warning locally.
 
-Run debug/test builds with sanitizers (in addition to the flags above):
+Run debug/test builds with sanitizers, in addition to the flags above (and after removing `-fsanitize=safe-stack`, which is incompatible with LeakSanitizer):
 
 AddressSanitizer + UndefinedBehaviorSanitizer:
 ```
