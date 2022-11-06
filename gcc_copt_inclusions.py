@@ -3,6 +3,7 @@
 
 
 import argparse
+import sys
 import logging
 import re
 from enum import Enum
@@ -196,7 +197,11 @@ for name, opt in options.items():
     # Aliases are added to the real option, then deleted
     alias_target = opt.get_alias_target()
     if alias_target:
-        options[alias_target].aliases.append(name)
+        try:
+            options[alias_target].aliases.append(name)
+        except KeyError:
+            print(f"Error: could not find Alias target '{alias_target}', check for typo")
+            sys.exit(1)
         continue
     enabled_by = opt.get_enabled_by()
     if enabled_by:
