@@ -27,7 +27,7 @@ and choose the right set of command line options.
 Comments are of course [welcome](https://github.com/airbus-seclab/c-compiler-security/issues).
 
 
-## GCC TL;DR
+## GCC 12 TL;DR
 
 [Detailed page](./gcc_compilation.md)
 
@@ -36,8 +36,9 @@ Always use the following [warnings](./gcc_compilation.md#warnings) and [flags](.
 -O2
 -Werror
 -Wall -Wextra -Wpedantic -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wtrampolines -Walloca -Wvla -Warray-bounds=2 -Wimplicit-fallthrough=3 -Wtraditional-conversion -Wshift-overflow=2 -Wcast-qual -Wstringop-overflow=4 -Wconversion -Warith-conversion -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wformat-signedness -Wshadow -Wstrict-overflow=4 -Wundef -Wstrict-prototypes -Wswitch-default -Wswitch-enum -Wstack-usage=1000000 -Wcast-align=strict
--D_FORTIFY_SOURCE=2
--fstack-protector-strong -fstack-clash-protection -fPIE 
+-D_FORTIFY_SOURCE=3
+-fstack-protector-strong -fstack-clash-protection -fPIE
+-fsanitize=bounds -fsanitize-undefined-trap-on-error
 -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
 
@@ -56,7 +57,7 @@ If your program is multi-threaded, run with `-fsanitize=thread` (incompatible wi
 
 Finally, use [`-fanalyzer`](./gcc_compilation.md#code-analysis) to spot potential issues.
 
-## Clang TL;DR
+## Clang 11 TL;DR
 
 [Detailed page](./clang_compilation.md)
 
@@ -66,8 +67,9 @@ First compile with:
 -O2
 -Werror
 -Walloca -Wcast-qual -Wconversion -Wformat=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wvla -Warray-bounds -Warray-bounds-pointer-arithmetic -Wassign-enum -Wbad-function-cast -Wconditional-uninitialized -Wconversion -Wfloat-equal -Wformat-type-confusion -Widiomatic-parentheses -Wimplicit-fallthrough -Wloop-analysis -Wpointer-arith -Wshift-sign-overflow -Wshorten-64-to-32 -Wswitch-enum -Wtautological-constant-in-range-compare -Wunreachable-code-aggressive -Wthread-safety -Wthread-safety-beta -Wcomma
--D_FORTIFY_SOURCE=2
+-D_FORTIFY_SOURCE=3
 -fstack-protector-strong -fsanitize=safe-stack -fPIE -fstack-clash-protection
+-fsanitize=bounds -fsanitize-undefined-trap-on-error
 -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,separate-code
 ```
 

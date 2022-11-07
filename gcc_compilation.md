@@ -65,6 +65,15 @@ Those are not really security options per se, but will catch some logical errors
 *Note*: You can disable warnings for system includes by using the `-isystem`
 option to specify the paths which will be used for "system" includes (`#include <file.h>`).
 
+
+##### GCC 12
+
+GCC 12 [introduced](https://github.com/trou/compiler-warnings/blob/gcc-12/gcc/warnings-diff-11-12.txt) new warnings which are relevant for security:
+
+* `-Wdangling-pointer=2` (enabled by `-Wall`) which checks if pointers still refer to "dead" variables.
+* `-Wtrivial-auto-var-init`, to be used with `-ftrivial-auto-var-init` to warn about unhandled cases
+* `-Wuse-after-free=3`, obviously warns about use-after-free.
+
 #### Extra flags
 
 * `-Wformat-signedness`: Warn (in format functions) about sign mismatches between the format specifiers and actual parameters.
@@ -85,9 +94,17 @@ option to specify the paths which will be used for "system" includes (`#include 
 * `-fPIE`: generate position-independent code (needed for ASLR).
 * `-fcf-protection=full|return|branch`: Generate code for [Intel CET](https://i.blackhat.com/asia-19/Thu-March-28/bh-asia-Sun-How-to-Survive-the-Hardware-Assisted-Control-Flow-Integrity-Enforcement.pdf).
 
+Starting with GCC 12:
+
+* `-ftrivial-auto-var-init=zero` will initalize all uninitialized variables to zero.
+
 #### Glibc flags
 
 * `-D_FORTIFY_SOURCE=2` will enable additional security features of the GNU libc when calling memory and string handling functions [Ref](https://man7.org/linux/man-pages/man7/feature_test_macros.7.html).
+
+Starting with GCC 12:
+
+* `-D_FORTIFY_SOURCE=3` will try to detect overflows in variable length variables.
 
 #### Linker flags
 
@@ -116,7 +133,7 @@ GCC supports various *runtime* sanitizers, which are enabled by the `-fsanitize`
 ### Code analysis
 
 GCC 10 [introduced](https://developers.redhat.com/blog/2020/03/26/static-analysis-in-gcc-10)
-the `-fanalyzer` static code analysis tool, which was vastly [improved](https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11) in GCC 11.
+the `-fanalyzer` static code analysis tool, which was vastly [improved](https://developers.redhat.com/blog/2021/01/28/static-analysis-updates-in-gcc-11) in GCC 11, and [again](https://developers.redhat.com/articles/2022/04/12/state-static-analysis-gcc-12-compiler#uncovering_uninitialized_values) in GCC 12.
 
 It tries to detect memory management issues (double free, use after free,
 etc.), pointers-related problems, etc.
